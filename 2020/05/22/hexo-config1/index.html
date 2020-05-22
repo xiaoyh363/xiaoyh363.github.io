@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo 配置（1）———— 网站配置、更新主题等 | xiaoyh 的个人博客 | 随笔</title>
+
+  
+  <meta name="author" content="xiaoyh">
+  
+
+  
+  <meta name="description" content="个人博客">
+  
+
+  
+  
+  <meta name="keywords" content="hexo">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="hexo 配置（1）———— 网站配置、更新主题等"/>
+
+  <meta property="og:site_name" content="xiaoyh 的个人博客"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="xiaoyh 的个人博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">xiaoyh 的个人博客</a>
+    </h1>
+    <p class="site-description">随笔</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/categories">Categories</a></li>
+      
+        <li><a href="/tags">Tags</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>hexo 配置（1）———— 网站配置、更新主题等</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/05/22/hexo-config1/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-05-22T06:31:21.000Z">
+          2020-05-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在 _config.yml 中可以修改大部份的配置。</p>
+<h2 id="1-网站配置（Site）"><a href="#1-网站配置（Site）" class="headerlink" title="1 网站配置（Site）"></a>1 网站配置（Site）</h2><p>在 <code>_config.yml</code> 中 <code>#Site</code> 下的字段就是网站配置的字段，分别对应：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>title</td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>网站副标题</td>
+</tr>
+<tr>
+<td>description</td>
+<td>网站描述，主要用于SEO，告诉搜索引擎一个关于您站点的简单描述</td>
+</tr>
+<tr>
+<td>author</td>
+<td>作者</td>
+</tr>
+<tr>
+<td>language</td>
+<td>网站使用的语言</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>网站时区。Hexo 默认使用电脑的时区。时区列表。比如说：America/New_York, Japan, 和 UTC 。</td>
+</tr>
+</tbody></table>
+<h2 id="2-更换主题皮肤"><a href="#2-更换主题皮肤" class="headerlink" title="2. 更换主题皮肤"></a>2. 更换主题皮肤</h2><p><code>_config.yml</code> 中的 <code>theme</code> 字段指定主题，其名字对应于 <code>themes</code> 目录下的文件夹名。<br>先下载主题（以 <code>nexT</code> 为例）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:iissnan/hexo-theme-next.git themes\nexT</span><br></pre></td></tr></table></figure>
+
+<p>然后修改 <code>_config.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">nexT</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-22 18:27:43</span><br><span class="line">layout: tags</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>_config.yml</code> 添加如下设置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
+
+<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/hexo/">hexo</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2020 xiaoyh
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
