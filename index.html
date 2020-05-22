@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>xiaoyh 的个人博客 | 随笔</title>
+  <title>xiaoyh 的个人博客 | 笔记</title>
 
   
   <meta name="author" content="xiaoyh">
@@ -42,7 +42,7 @@
     <h1 class="site-title">
       <a href="/">xiaoyh 的个人博客</a>
     </h1>
-    <p class="site-description">随笔</p>
+    <p class="site-description">笔记</p>
   </div>
   <nav class="site-navigation">
     <ul>
@@ -65,7 +65,159 @@
 
   
     
-    <h3 class="article-title"><a href="/2020/05/22/hexo-config1/"><span>hexo 配置（1）———— 网站配置、更新主题等</span></a></h3>
+    <h3 class="article-title"><a href="/2020/05/22/node-start/"><span>Node.js 的安装及基本配置</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/05/22/node-start/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-05-22T13:51:45.000Z">
+          2020-05-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><code>Node.js</code> 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。在之前的 JavaScript 的学习中，一般在浏览器中调试 JavaScript 程序，这是因为浏览器中内置了 JavaScript 的运行环境。有了 <code>Node.js</code> 后 JavaScript 有了另外的运行环境，使得 JavaScript 的领域变得更广。</p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><blockquote>
+<p>官方下载：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>淘宝镜像：<a href="https://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node</a></p>
+</blockquote>
+<p>安装完成后可以在终端中输入 <code>node -v</code> ，若输出版本号则表示安装成功。</p>
+<h2 id="2-修改-npm-默认仓库路径与环境变量"><a href="#2-修改-npm-默认仓库路径与环境变量" class="headerlink" title="2. 修改 npm 默认仓库路径与环境变量"></a>2. 修改 npm 默认仓库路径与环境变量</h2><p><code>npm</code> 于 <code>node</code> 就如同 <code>pip</code> 于 <code>python</code> 一样，<code>npm</code> 是随同 <code>node</code> 一起安装的包管理工具，可以下载别人发布上去的库等。<br><code>npm</code> 的中央仓库默认为 <code>https://registry.npmjs.org/</code> ，基于众所周知的原因，默认中央仓库的下载速度往往很慢。还有 <code>npm</code> 全局仓库的默认路径为 <code>~\AppData\Roaming\npm</code>，鉴于一般 PC 机的情况，这个路径也不是很好。<br>不过， <code>npm</code> 可以设置中央仓库以及全局仓库路径。打开 <code>node</code> 的安装目录，打开文件 <code>node_modules\npm\npmrc</code> ，写入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">registry&#x3D;&quot;https:&#x2F;&#x2F;registry.npm.taobao.org&#x2F;&quot;</span><br><span class="line">prefix&#x3D;D:\Program Files\nodejs\node_global</span><br><span class="line">cache&#x3D;D:\Program Files\nodejs\node_cache</span><br></pre></td></tr></table></figure>
+
+<p>依次是设置中央仓库为淘宝镜像，以及设置全局仓库路径和缓存路径。对于后两者，要创建对应的文件夹。</p>
+<h2 id="3-修改环境变量中的全局环境路径"><a href="#3-修改环境变量中的全局环境路径" class="headerlink" title="3. 修改环境变量中的全局环境路径"></a>3. 修改环境变量中的全局环境路径</h2><p>在 <code>node</code> 的安装过程中，安装包会把默认全局仓库的路径添加进环境变量，以便可以通过命令行去运行一些全局仓库里面的包。但是经过上面的操作，全局仓库路径被更改，所以要去更新。<br>右键我的电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量，打开环境变量设置窗口，全局仓库的路径被设置在用户变量的 <code>Path</code> 中</p>
+<img src="/2020/05/22/node-start/npm1.png" class="" title="npm 全局仓库默认路径">
+
+<p>将其修改为设置后的全局仓库路径</p>
+<img src="/2020/05/22/node-start/npm2.jpg" class="" title="npm 全局仓库修改后的路径">
+
+<p>至此，<code>node</code> 的基本配置结束。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/node-js/">node.js</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2020/05/22/git-start/"><span>git 的安装及基本配置</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2020/05/22/git-start/" rel="bookmark">
+        <time class="entry-date published" datetime="2020-05-22T12:10:14.000Z">
+          2020-05-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><code>git</code> 是什么就不多说了，直接开始</p>
+<h2 id="1-git-镜像下载"><a href="#1-git-镜像下载" class="headerlink" title="1. git 镜像下载"></a>1. git 镜像下载</h2><p>在有些时候 <code>git</code> 的<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载官网</a>会访问不了，或者下载速度很慢，这个时候需要采用其他镜像地址（比如淘宝的 <a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a>）去下载。<br>安装时，除了路径，其余均用默认项即可。<br>安装完成后可以在终端中输入 <code>git version</code> ，若输出版本号则表示安装成功。</p>
+<h2 id="2-配置全局用户名和邮箱"><a href="#2-配置全局用户名和邮箱" class="headerlink" title="2. 配置全局用户名和邮箱"></a>2. 配置全局用户名和邮箱</h2><p><code>git</code> 无论是提交还是拷贝，都需要配置用户名和邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"username"</span>  </span><br><span class="line">git config --global user.email <span class="string">"aaa@xxx.com"</span></span><br></pre></td></tr></table></figure>
+
+<p><code>--global</code> 表示全局的，即当前用户下的所有仓库都有效。该配置会出现在 <code>~/.gitconfig</code> 中，打开后会发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    email &#x3D; aaa@xxx.com</span><br><span class="line">    name &#x3D; username</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-局部配置"><a href="#2-1-局部配置" class="headerlink" title="2.1 局部配置"></a>2.1 局部配置</h3><p>作为全局配置的反面，局部配置就是不加 <code>--global</code>，即：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"username"</span>  </span><br><span class="line">git config user.email <span class="string">"aaa@xxx.com"</span></span><br></pre></td></tr></table></figure>
+
+<p>局部配置只对当前仓库起效的，它的配置信息会在当前仓库的 <code>.gitconfig</code> 下。<br>当局部配置与全局配置同时存在时，局部配置的优先级更高。</p>
+<h2 id="3-配置-ssh-key"><a href="#3-配置-ssh-key" class="headerlink" title="3. 配置 ssh key"></a>3. 配置 ssh key</h2><p>若想把本地仓库 push 到 <code>github</code> 上，以及其他的一些行为，还需要配置 <code>git</code> 与 <code>github</code> 的 <code>ssh key</code> 。<br>执行 <code>ssh-keygen -t rsa -C &quot;aaa@xxx.com&quot;</code> ，进行三次或四次直接确认：</p>
+<ol>
+<li>确认秘钥的保存路径（如果不需要改路径则直接回车）；</li>
+<li>如果上一步置顶的保存路径下已经有秘钥文件，则需要确认是否覆盖（如果之前的秘钥不再需要则直接回车覆盖，如需要则手动拷贝到其他目录后再覆盖）；</li>
+<li>创建密码（如果不需要密码则直接回车）；</li>
+<li>确认密码；</li>
+</ol>
+<p>确认完毕后，在 <code>~/.ssh</code> 下会生成两个文件，分别是私钥 <code>id_rsa</code> 与 公钥 <code>id_rsa.pub</code> 。<br>接下来，打开 <code>github</code> ，进入设置页</p>
+<img src="/2020/05/22/git-start/ssh_key_1.jpg" class="" title="github添加密钥">
+
+<p>再选择 <code>SSH and GPG keys</code></p>
+<img src="/2020/05/22/git-start/ssh_key_2.png" class="" title="github添加密钥">
+
+<p>点击右上角的 <code>New SSH key</code> 创建一个 key</p>
+<img src="/2020/05/22/git-start/ssh_key_3.png" class="" title="github添加密钥">
+
+<p>用记事本或者其他文本编辑器打开公钥 <code>id_rsa.pub</code> , 将里面的内容复制粘贴到下图红线内的框内，写好 <code>title</code> 后添加</p>
+<img src="/2020/05/22/git-start/ssh_key_4.png" class="" title="github添加密钥">
+
+<p>至此，<code>github</code> 的密钥添加完毕，<code>git</code> 可以正常地将项目推送到 <code>github</code> 上了。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/git/">git</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2020/05/22/hexo-config1/"><span>hexo 配置（1）—— 网站配置、更新主题等</span></a></h3>
     
   
 
@@ -125,13 +277,25 @@
 <p>然后修改 <code>_config.yml</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">nexT</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
+<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面。<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-22 18:27:43</span><br><span class="line">layout: tags</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>然后在 <code>_config.yml</code> 添加如下设置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
 
-<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理</p>
+<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理。</p>
+<h2 id="4-资源文件夹"><a href="#4-资源文件夹" class="headerlink" title="4. 资源文件夹"></a>4. 资源文件夹</h2><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。<br>当你的博客想要插入一些图片，最简单的方式就是把图片放在 <code>source/images</code> 中，然后通过类似于 <code>![](/images/image.jpg)</code> 的方式访问。</p>
+<h3 id="4-1-文章资源文件夹"><a href="#4-1-文章资源文件夹" class="headerlink" title="4.1 文章资源文件夹"></a>4.1 文章资源文件夹</h3><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，<code>Hexo</code> 也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>当资源文件管理功能打开后，<code>Hexo</code> 将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个 markdown 文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
+<h3 id="4-2-相对路径引用的标签插件"><a href="#4-2-相对路径引用的标签插件" class="headerlink" title="4.2 相对路径引用的标签插件"></a>4.2 相对路径引用的标签插件</h3><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在 <code>Hexo 3</code> 之后，许多新的标签插件被加入到了核心代码中，这使得可以更简单地在文章中引用资源</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引用资源文件夹里的图片需使用 <code>asset_img</code> 标签，其格式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img 图片名.jpg 这是图片的说明 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式，图片将能同时出现在文章和主页以及归档页中。</p>
 
       
     </div>
@@ -228,9 +392,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run push</span><br></pre></td></tr></table></figure>
 
 <h2 id="4-新建博客文档"><a href="#4-新建博客文档" class="headerlink" title="4. 新建博客文档"></a>4. 新建博客文档</h2><p>可以执行以下命令来创建一篇新文章：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
 
-<p>其中 <code>title</code> 表示文件名和博客标题</p>
+<p>其中 <code>title</code> 表示文件名和博客标题。</p>
 
       
     </div>

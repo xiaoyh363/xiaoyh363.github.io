@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hexo 配置（1）———— 网站配置、更新主题等 | xiaoyh 的个人博客 | 随笔</title>
+  <title>hexo 配置（1）—— 网站配置、更新主题等 | xiaoyh 的个人博客 | 笔记</title>
 
   
   <meta name="author" content="xiaoyh">
@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="hexo 配置（1）———— 网站配置、更新主题等"/>
+  <meta property="og:title" content="hexo 配置（1）—— 网站配置、更新主题等"/>
 
   <meta property="og:site_name" content="xiaoyh 的个人博客"/>
 
@@ -45,7 +45,7 @@
     <h1 class="site-title">
       <a href="/">xiaoyh 的个人博客</a>
     </h1>
-    <p class="site-description">随笔</p>
+    <p class="site-description">笔记</p>
   </div>
   <nav class="site-navigation">
     <ul>
@@ -67,7 +67,7 @@
 
   
     
-    <h3 class="article-title"><span>hexo 配置（1）———— 网站配置、更新主题等</span></h3>
+    <h3 class="article-title"><span>hexo 配置（1）—— 网站配置、更新主题等</span></h3>
     
   
 
@@ -127,13 +127,25 @@
 <p>然后修改 <code>_config.yml</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">nexT</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
+<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面。<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-22 18:27:43</span><br><span class="line">layout: tags</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <p>然后在 <code>_config.yml</code> 添加如下设置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
 
-<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理</p>
+<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理。</p>
+<h2 id="4-资源文件夹"><a href="#4-资源文件夹" class="headerlink" title="4. 资源文件夹"></a>4. 资源文件夹</h2><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。<br>当你的博客想要插入一些图片，最简单的方式就是把图片放在 <code>source/images</code> 中，然后通过类似于 <code>![](/images/image.jpg)</code> 的方式访问。</p>
+<h3 id="4-1-文章资源文件夹"><a href="#4-1-文章资源文件夹" class="headerlink" title="4.1 文章资源文件夹"></a>4.1 文章资源文件夹</h3><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，<code>Hexo</code> 也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>当资源文件管理功能打开后，<code>Hexo</code> 将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个 markdown 文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
+<h3 id="4-2-相对路径引用的标签插件"><a href="#4-2-相对路径引用的标签插件" class="headerlink" title="4.2 相对路径引用的标签插件"></a>4.2 相对路径引用的标签插件</h3><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在 <code>Hexo 3</code> 之后，许多新的标签插件被加入到了核心代码中，这使得可以更简单地在文章中引用资源</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引用资源文件夹里的图片需使用 <code>asset_img</code> 标签，其格式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img 图片名.jpg 这是图片的说明 %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式，图片将能同时出现在文章和主页以及归档页中。</p>
 
       
     </div>
