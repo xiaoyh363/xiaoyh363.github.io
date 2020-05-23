@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 什么是 SQL 结构化查询语言(Structured Query Language)简称 SQL ，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。  如何创建一个数据库创建数据库要使用 CREATE DATABASE 语句： 1create database database_name;  创建数据库中的表要使用 CREATE TABLE 语句： 12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 基础">
+<meta property="og:url" content="http://yoursite.com/2020/05/23/sql-base/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="1. 什么是 SQL 结构化查询语言(Structured Query Language)简称 SQL ，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。  如何创建一个数据库创建数据库要使用 CREATE DATABASE 语句： 1create database database_name;  创建数据库中的表要使用 CREATE TABLE 语句： 12345">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-22T16:18:15.000Z">
+<meta property="article:modified_time" content="2020-05-23T07:37:48.207Z">
+<meta property="article:author" content="xiaoyh">
+<meta property="article:tag" content="sql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/23/sql-base/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SQL 基础 | xiaoyh 的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/sql-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL 基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-23 00:18:15 / 修改时间：15:37:48" itemprop="dateCreated datePublished" datetime="2020-05-23T00:18:15+08:00">2020-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-什么是-SQL"><a href="#1-什么是-SQL" class="headerlink" title="1. 什么是 SQL"></a>1. 什么是 SQL</h2><blockquote>
+<p>结构化查询语言(Structured Query Language)简称 SQL ，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。</p>
+</blockquote>
+<h3 id="如何创建一个数据库"><a href="#如何创建一个数据库" class="headerlink" title="如何创建一个数据库"></a>如何创建一个数据库</h3><p>创建数据库要使用 <code>CREATE DATABASE</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> database_name;</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库中的表要使用 <code>CREATE TABLE</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">    col1 <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    col2 <span class="built_in">int</span>(<span class="number">32</span>),</span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="2-Crud"><a href="#2-Crud" class="headerlink" title="2. Crud"></a>2. Crud</h2><p>数据库最基本的操作无非就是增（create）、删（delete）、查（retrieve/read）、改（update）。</p>
+<h3 id="增（create）"><a href="#增（create）" class="headerlink" title="增（create）"></a>增（create）</h3><p>增操作要使用 <code>INSERT INTO</code> ，将数据添加至尾部：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> table_name</span><br><span class="line">(col1, col2, ...) <span class="comment">-- 这一行是字段名，可省略，</span></span><br><span class="line"><span class="keyword">values</span></span><br><span class="line"><span class="comment">-- 若字段名省略，则需要列出插入行的每一列数据</span></span><br><span class="line">(value1, value2, ...),</span><br><span class="line">(value1, value2, ...),</span><br><span class="line">...</span><br><span class="line">(value1, value2, ...);  <span class="comment">-- 可一次性插入多组数据</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删（delete）"><a href="#删（delete）" class="headerlink" title="删（delete）"></a>删（delete）</h3><p>删操作要使用 <code>DELETE</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> * <span class="keyword">from</span> table_name; <span class="comment">-- 删除所有数据，* 可以省略</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查（retrieve-read）"><a href="#查（retrieve-read）" class="headerlink" title="查（retrieve/read）"></a>查（retrieve/read）</h3><p>查操作要使用 <code>SELECT</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name;           <span class="comment">-- 查询所有字段</span></span><br><span class="line"><span class="keyword">select</span> col1, col2 <span class="keyword">from</span> table_name;  <span class="comment">-- 查询指定字段</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改（update）"><a href="#改（update）" class="headerlink" title="改（update）"></a>改（update）</h3><p>改操作要使用 <code>UPDATE</code> ，由于更新操作需要指定某一条数据，所以必须使用条件语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> table_name</span><br><span class="line"><span class="keyword">set</span> col1=value1, col2=value2, ...</span><br><span class="line"><span class="keyword">where</span> some_col=some_value;  <span class="comment">-- 指定某数据更新某些字段</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-WHERE-子句"><a href="#3-WHERE-子句" class="headerlink" title="3. WHERE 子句"></a>3. WHERE 子句</h2><p><code>WHERE</code> 是最常用的子句，提取满足条件的语句，一般用于查、改、删。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 只查询满足 some_col=some_value 的数据的 col1 与 col2 字段</span></span><br><span class="line"><span class="keyword">select</span> col1, col2 <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col=some_value;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 只删除满足条件的数据</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> table_name <span class="keyword">where</span> condition</span><br></pre></td></tr></table></figure>
+
+<h3 id="IN-操作符"><a href="#IN-操作符" class="headerlink" title="IN 操作符"></a>IN 操作符</h3><p>IN 操作符允许在 WHERE 子句中规定多个值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 不使用 IN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col=value1 <span class="keyword">or</span> some_col=value2;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 IN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col <span class="keyword">in</span> (value1, value2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 若想选取不在这个范围内的，可以使用 NOT IN</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不使用 NOT IN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col!=value1 <span class="keyword">and</span> some_col!=value2;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 NOT IN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col <span class="keyword">not</span> <span class="keyword">in</span> (value1, value2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="BETWEEN-操作符"><a href="#BETWEEN-操作符" class="headerlink" title="BETWEEN 操作符"></a>BETWEEN 操作符</h3><p><code>BETWEEN</code> 操作符用于选取介于某段数据范围内的值。对于不同的数据库，区间的开闭情况也不一样（有可能是闭区间，也有可能是半开半闭区间）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 不使用 BETWEEN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col&lt;=value1 <span class="keyword">and</span> some_col&gt;=value2;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 BETWEEN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col <span class="keyword">between</span> value1 <span class="keyword">and</span> value2;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 若想选取不在这个区间范围内的，可以使用 NOT BETWEEN</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不使用 NOT BETWEEN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col&gt;value1 <span class="keyword">or</span> some_col&lt;value2;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 NOT BETWEEN</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> some_col <span class="keyword">not</span> <span class="keyword">between</span> value1 <span class="keyword">and</span> value2;</span><br></pre></td></tr></table></figure>
+
+<p>若 <code>BETWEEN</code> 后用的是文本值，则表示以介于文本范围之间开头的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 选取 name 以介于 'A' 和 'H' 之间字母开始的数据</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> Websites <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">between</span> <span class="string">'A'</span> <span class="keyword">and</span> <span class="string">'H'</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="LIKE-操作符"><a href="#LIKE-操作符" class="headerlink" title="LIKE 操作符"></a>LIKE 操作符</h3><p><code>LIKE</code> 操作符用于在 <code>WHERE</code> 子句中进行模糊查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name</span><br><span class="line"><span class="keyword">where</span> col_name <span class="keyword">like</span> pattern;</span><br></pre></td></tr></table></figure>
+
+<p>区别于 <code>=</code> ，<code>LIKE</code> 后的字符串是模式串，有以下几种通配符：</p>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%</td>
+<td>替代 0 个或多个字符</td>
+</tr>
+<tr>
+<td>_</td>
+<td>替代 1 个字符</td>
+</tr>
+<tr>
+<td>[charlist]</td>
+<td>字符列中的任何单一字符</td>
+</tr>
+<tr>
+<td>[^charlist] 或 [!charlist]</td>
+<td>不在字符列中的任何单一字符</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">'https%'    <span class="comment">-- 表示以 https 开头的字符串</span></span><br><span class="line">'%xiaoyh%'  <span class="comment">-- 表示包含 xiaoyh 的字符串</span></span><br><span class="line">'_pple'     <span class="comment">-- apple、bpple 等都符合</span></span><br><span class="line">'[ab]pple'  <span class="comment">-- 仅 apple、bpple 符合</span></span><br><span class="line">'[a-H]pple' <span class="comment">-- apple、bpple ... hpple 符合（sql 大小写不敏感）</span></span><br><span class="line">'[!ab]pple' <span class="comment">-- apple、bpple 不符合</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><p>还有一些其他的关键字</p>
+<h3 id="SELECT-DISTINCT"><a href="#SELECT-DISTINCT" class="headerlink" title="SELECT DISTINCT"></a>SELECT DISTINCT</h3><p><code>SELECT DISTINCT</code> 会把查询的字段去重。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> col1, col2 <span class="keyword">from</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p><code>ORDER BY</code> 对指定字段排序（默认升序），如果有多个字段，则先给前面的字段排序，再在此基础上给后面的字段排序。如果想使用逆序得加 <code>DESC</code> 关键字。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 升序</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> col1, col2;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 逆序</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> col1, col2 <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql/" rel="tag"># sql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/22/node-start/" rel="prev" title="Node.js 的安装及基本配置">
+      <i class="fa fa-chevron-left"></i> Node.js 的安装及基本配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/23/sql-advance-1/" rel="next" title="SQL 进阶（1）">
+      SQL 进阶（1） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是-SQL"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是 SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何创建一个数据库"><span class="nav-number">1.1.</span> <span class="nav-text">如何创建一个数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Crud"><span class="nav-number">2.</span> <span class="nav-text">2. Crud</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增（create）"><span class="nav-number">2.1.</span> <span class="nav-text">增（create）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删（delete）"><span class="nav-number">2.2.</span> <span class="nav-text">删（delete）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查（retrieve-read）"><span class="nav-number">2.3.</span> <span class="nav-text">查（retrieve&#x2F;read）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改（update）"><span class="nav-number">2.4.</span> <span class="nav-text">改（update）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-WHERE-子句"><span class="nav-number">3.</span> <span class="nav-text">3. WHERE 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IN-操作符"><span class="nav-number">3.1.</span> <span class="nav-text">IN 操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BETWEEN-操作符"><span class="nav-number">3.2.</span> <span class="nav-text">BETWEEN 操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE-操作符"><span class="nav-number">3.3.</span> <span class="nav-text">LIKE 操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-其他"><span class="nav-number">4.</span> <span class="nav-text">4. 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-DISTINCT"><span class="nav-number">4.1.</span> <span class="nav-text">SELECT DISTINCT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY"><span class="nav-number">4.2.</span> <span class="nav-text">ORDER BY</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

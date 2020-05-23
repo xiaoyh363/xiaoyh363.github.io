@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什么是乐观锁乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题 —— 乐观锁与悲观锁">
+<meta property="og:url" content="http://yoursite.com/2020/05/23/mysql-lock/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="什么是乐观锁乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-23T15:41:06.000Z">
+<meta property="article:modified_time" content="2020-05-23T18:10:07.561Z">
+<meta property="article:author" content="xiaoyh">
+<meta property="article:tag" content="并发">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="锁">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/23/mysql-lock/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试题 —— 乐观锁与悲观锁 | xiaoyh 的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/mysql-lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试题 —— 乐观锁与悲观锁
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-23 23:41:06" itemprop="dateCreated datePublished" datetime="2020-05-23T23:41:06+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 02:10:07" itemprop="dateModified" datetime="2020-05-24T02:10:07+08:00">2020-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是乐观锁"><a href="#什么是乐观锁" class="headerlink" title="什么是乐观锁"></a>什么是乐观锁</h2><p>乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。</p>
+<a id="more"></a>
+
+<h2 id="什么是悲观锁"><a href="#什么是悲观锁" class="headerlink" title="什么是悲观锁"></a>什么是悲观锁</h2><p>悲观锁在操作数据时比较悲观，每次读数据的时候都认为别人会同时修改数据。所以每次在读数据的时候都会上锁，直到操作完成后才会释放锁，这样别人想读取数据就会阻塞直到获取锁。</p>
+<h2 id="乐观锁与悲观锁的实现方式"><a href="#乐观锁与悲观锁的实现方式" class="headerlink" title="乐观锁与悲观锁的实现方式"></a>乐观锁与悲观锁的实现方式</h2><p>乐观锁的实现方式主要有两种：CAS 机制和版本号机制</p>
+<h3 id="CAS（Compare-And-Swap，比较并交换）"><a href="#CAS（Compare-And-Swap，比较并交换）" class="headerlink" title="CAS（Compare And Swap，比较并交换）"></a>CAS（Compare And Swap，比较并交换）</h3><p>CAS 机制是最典型的乐观锁实现方式，在 Java 中 java.util.concurrent.atomic 包下面的原子变量类就是基于 CAS 实现的乐观锁。</p>
+<p>CAS 操作包括了3个操作数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内存地址（V）</span><br><span class="line">旧值（A）</span><br><span class="line">拟写入的新值（B）</span><br></pre></td></tr></table></figure>
+
+<p>操作数据之前先记录目前数据的地址 V 与值 A ，操作数据得到结果为 B。<br>操作结束后，如果内存地址 V 的值等于 A 即表明在此期间数据未被修改，则将该位置的值更新为 B，否则不进行任何操作。<br>许多 CAS 的操作是自旋的：如果操作不成功，会一直重试，直到操作成功为止。</p>
+<blockquote>
+<p>这里引出一个新的问题，既然 CAS 包含了 Compare 和 Swap 两个操作，它又如何保证原子性呢？<br>答案是：CAS 是由 CPU 支持的原子操作，其原子性是在硬件层面进行保证的。</p>
+</blockquote>
+<p>下面看一下 Java 中的 AtomicInteger 的源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AtomicInteger</span> <span class="keyword">extends</span> <span class="title">Number</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 存储整数值，volatile 保证可视性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Unsafe 是用来帮助 Java 访问操作系统底层资源的类（如可以分配内存、释放内存）</span></span><br><span class="line">    <span class="comment">// 通过 Unsafe，Java 具有了底层操作能力，可以提升运行效率；</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Unsafe unsafe = Unsafe.getUnsafe();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// valueOffset 是 value 在内存中的偏移量即地址</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> valueOffset;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过 Unsafe 获得 valueOffset</span></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            valueOffset = unsafe.objectFieldOffset(AtomicInteger.class.getDeclaredField("value"));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123; <span class="keyword">throw</span> <span class="keyword">new</span> Error(ex); &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// except 期望值即旧值 A，update 新值 B</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">compareAndSet</span><span class="params">(<span class="keyword">int</span> expect, <span class="keyword">int</span> update)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> unsafe.compareAndSwapInt(<span class="keyword">this</span>, valueOffset, expect, update);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 做自增操作并返回结果</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (;;) &#123;  <span class="comment">// 不成功就自旋</span></span><br><span class="line">            <span class="keyword">int</span> current = get();  </span><br><span class="line">            <span class="keyword">int</span> next = current + <span class="number">1</span>;  </span><br><span class="line">            <span class="keyword">if</span> (compareAndSet(current, next))  </span><br><span class="line">                <span class="keyword">return</span> current;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本号机制"><a href="#版本号机制" class="headerlink" title="版本号机制"></a>版本号机制</h3><p>版本号机制一般用于数据库，在 mysql 数据库中的 InnoDB 存储引擎的 MVCC 控制方式（即 Mutil-Version Concurrency Control，多版本并发控制）就是基于此机制实现。<br>其基本思路是，在数据中增加一个字段 version ，表示该数据的版本号，每当数据被修改，版本号加 1。当某个线程查询数据时，将该数据的版本号一起查出来，在该线程更新数据时，判断当前版本号与之前读取的版本号是否一致，如果一致才进行操作，否则重试更新操作，直到更新成功。<br>也可以根据实际情况选用其他能够标记数据版本的字段，如时间戳等。</p>
+<p>下面以“更新玩家金币数”为例，看看版本号机制是如何应对并发问题的。<br>游戏系统需要更新玩家的金币数，更新后的金币数依赖于当前状态(如金币数、等级等)，因此更新前需要先查询玩家当前状态。  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateCoins</span><span class="params">(Integer playerId)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 根据 player_id 查询玩家信息</span></span><br><span class="line">    Player player = query(<span class="string">"select * from player where player_id = &#123;0&#125;"</span>, playerId);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据玩家当前信息及其他信息，计算新的金币数</span></span><br><span class="line">    Long newCoins = calculate(player);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新金币数</span></span><br><span class="line">    update(<span class="string">"update player set coins = &#123;0&#125; where player_id = &#123;1&#125;"</span>, newCoins, playerId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的实现方式，没有进行任何线程安全方面的保护。如果有其他线程在 query 和 update 之间更新了玩家的金币数，会导致这一线程覆盖掉更新的信息，导致玩家金币数的不准确。<br>版本号机制为玩家信息增加一个字段：version。在初次查询玩家信息时，同时查询出version信息；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateCoins</span><span class="params">(Integer playerId)</span></span>&#123;</span><br><span class="line">    <span class="comment">// ... 前面一样</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 增加对 version 的校验</span></span><br><span class="line">    update(<span class="string">"update player set coins = &#123;0&#125; where player_id = &#123;1&#125; and version = &#123;2&#125;"</span>,</span><br><span class="line">            newCoins, playerId, player.version);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在执行 update 操作时，校验 version 是否发生了变化，如果 version 变化，则重试更新操作。</p>
+<h3 id="悲观锁的实现"><a href="#悲观锁的实现" class="headerlink" title="悲观锁的实现"></a>悲观锁的实现</h3><p>传统的关系型数据库里就用到了很多悲观锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java 中 synchronized 和 ReentrantLock 等独占锁也是悲观锁思想的实现。</p>
+<p>对于 Java 中的自增操作，可以直接通过 synchronized 上锁，保证任何时刻只有一个线程在执行这个函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> value = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">increaseValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    value++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于数据库更新玩家金币数的操作，也可以通过 <code>select ... for update</code> 查询语句进行查询，该查询语句会为该玩家数据加上排它锁，直到事务提交或回滚时才会释放排它锁。在此期间，如果其他线程试图更新该玩家信息或者执行 select for update，会被阻塞。</p>
+<h2 id="乐观锁的缺点"><a href="#乐观锁的缺点" class="headerlink" title="乐观锁的缺点"></a>乐观锁的缺点</h2><h3 id="1-ABA-问题"><a href="#1-ABA-问题" class="headerlink" title="1. ABA 问题"></a>1. ABA 问题</h3><p>对于 CAS 机制，若在线程 1 操作数据期间，线程 2 把数据由 A 变为 B 再变为 A，线程 1 在要更新数据时就会认为数据没变化。J.U.C 包提供了一个带有标记的原子引用类 AtomicStampedReference 来解决这个问题，它可以通过控制变量值的版本来保证 CAS 的正确性。不过，大部分情况下 ABA 问题不会影响程序并发的正确性。<br>版本号机制不存在 ABA 问题。</p>
+<h3 id="2-自旋开销大"><a href="#2-自旋开销大" class="headerlink" title="2. 自旋开销大"></a>2. 自旋开销大</h3><p>自旋 CAS 如果长时间不成功，会给 CPU 带来非常大的执行开销。</p>
+<h3 id="3-难以实现跨域的原子操作"><a href="#3-难以实现跨域的原子操作" class="headerlink" title="3. 难以实现跨域的原子操作"></a>3. 难以实现跨域的原子操作</h3><p>例如，CAS 只能保证单个变量操作的原子性，当涉及到多个变量时，CAS 是无能为力的，而悲观锁 synchronized 则可以通过对整个代码块加锁来处理。<br>再比如版本号机制，如果 query 的时候是针对表1，而 update 的时候是针对表2，也很难通过简单的版本号来实现乐观锁。</p>
+<h2 id="悲观锁的缺点"><a href="#悲观锁的缺点" class="headerlink" title="悲观锁的缺点"></a>悲观锁的缺点</h2><p>悲观锁由于被堵塞线程不断尝试去获得锁，会造成性能损耗，以及加锁和释放锁都需要消耗额外的资源。</p>
+<h2 id="乐观锁与悲观锁的使用场景"><a href="#乐观锁与悲观锁的使用场景" class="headerlink" title="乐观锁与悲观锁的使用场景"></a>乐观锁与悲观锁的使用场景</h2><h3 id="功能限制"><a href="#功能限制" class="headerlink" title="功能限制"></a>功能限制</h3><p>正如乐观锁的第三个缺点所说，乐观锁很难实现跨域的原子操作，如果在功能上无法通过乐观锁实现这个业务，就只能通过上悲观锁来实现。</p>
+<h3 id="竞争程度"><a href="#竞争程度" class="headerlink" title="竞争程度"></a>竞争程度</h3><p>如果悲观锁和乐观锁都可以使用，那么就要考虑竞争的激烈程度：</p>
+<p>当竞争不激烈（即读多写少）时选乐观锁，可以增加并发量，相比而言悲观锁会锁住代码块或数据，其他线程无法同时访问，降低并发，而且加锁和释放锁都需要消耗额外的资源。</p>
+<p>当竞争激烈（即写多读少）时选悲观锁，因为竞争激烈时，CAS 自旋的概率会比较大，从而浪费更多的CPU资源，效率低于 synchronized 。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/sql/" rel="tag"># sql</a>
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/%E9%94%81/" rel="tag"># 锁</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/23/mysql-transaction/" rel="prev" title="MySQL 面试题 —— 事务">
+      <i class="fa fa-chevron-left"></i> MySQL 面试题 —— 事务
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是乐观锁"><span class="nav-number">1.</span> <span class="nav-text">什么是乐观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是悲观锁"><span class="nav-number">2.</span> <span class="nav-text">什么是悲观锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁与悲观锁的实现方式"><span class="nav-number">3.</span> <span class="nav-text">乐观锁与悲观锁的实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS（Compare-And-Swap，比较并交换）"><span class="nav-number">3.1.</span> <span class="nav-text">CAS（Compare And Swap，比较并交换）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本号机制"><span class="nav-number">3.2.</span> <span class="nav-text">版本号机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#悲观锁的实现"><span class="nav-number">3.3.</span> <span class="nav-text">悲观锁的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁的缺点"><span class="nav-number">4.</span> <span class="nav-text">乐观锁的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ABA-问题"><span class="nav-number">4.1.</span> <span class="nav-text">1. ABA 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-自旋开销大"><span class="nav-number">4.2.</span> <span class="nav-text">2. 自旋开销大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-难以实现跨域的原子操作"><span class="nav-number">4.3.</span> <span class="nav-text">3. 难以实现跨域的原子操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#悲观锁的缺点"><span class="nav-number">5.</span> <span class="nav-text">悲观锁的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乐观锁与悲观锁的使用场景"><span class="nav-number">6.</span> <span class="nav-text">乐观锁与悲观锁的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能限制"><span class="nav-number">6.1.</span> <span class="nav-text">功能限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#竞争程度"><span class="nav-number">6.2.</span> <span class="nav-text">竞争程度</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

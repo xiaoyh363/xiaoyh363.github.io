@@ -1,243 +1,822 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  <title>xiaoyh 的个人博客 | 笔记</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-  <meta name="author" content="xiaoyh">
-  
+<link rel="stylesheet" href="/css/main.css">
 
-  
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
   <meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="xiaoyh 的个人博客">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="xiaoyh">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>xiaoyh 的个人博客</title>
   
 
-  
-
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-  
-
-  <meta property="og:site_name" content="xiaoyh 的个人博客"/>
-
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
-
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="xiaoyh 的个人博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-<meta name="generator" content="Hexo 4.2.1"></head>
 
 
-<body>
-<div class="blog">
-  <div class="content">
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">xiaoyh 的个人博客</a>
-    </h1>
-    <p class="site-description">笔记</p>
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/categories">Categories</a></li>
-      
-        <li><a href="/tags">Tags</a></li>
-      
-    </ul>
-  </nav>
-</header>
 
-    <main class="site-main posts-loop">
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-  <article>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
   
-    
-    <h3 class="article-title"><a href="/2020/05/22/node-start/"><span>Node.js 的安装及基本配置</span></a></h3>
-    
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/mysql-lock/">
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/05/22/node-start/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-05-22T13:51:45.000Z">
-          2020-05-22
-        </time>
-      </a>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
     </span>
-  </div>
 
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/mysql-lock/" class="post-title-link" itemprop="url">面试题 —— 乐观锁与悲观锁</a>
+        </h2>
 
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-23 23:41:06" itemprop="dateCreated datePublished" datetime="2020-05-23T23:41:06+08:00">2020-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 02:10:07" itemprop="dateModified" datetime="2020-05-24T02:10:07+08:00">2020-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是乐观锁"><a href="#什么是乐观锁" class="headerlink" title="什么是乐观锁"></a>什么是乐观锁</h2><p>乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/23/mysql-lock/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
   
 
-  <div class="article-content">
-    <div class="entry">
       
-        <p><code>Node.js</code> 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。在之前的 JavaScript 的学习中，一般在浏览器中调试 JavaScript 程序，这是因为浏览器中内置了 JavaScript 的运行环境。有了 <code>Node.js</code> 后 JavaScript 有了另外的运行环境，使得 JavaScript 的领域变得更广。</p>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/mysql-transaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/mysql-transaction/" class="post-title-link" itemprop="url">MySQL 面试题 —— 事务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-23 18:02:33 / 修改时间：23:40:06" itemprop="dateCreated datePublished" datetime="2020-05-23T18:02:33+08:00">2020-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="MYSQL-的事务处理"><a href="#MYSQL-的事务处理" class="headerlink" title="MYSQL 的事务处理"></a>MYSQL 的事务处理</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/23/mysql-transaction/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/hexo-next-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/hexo-next-config/" class="post-title-link" itemprop="url">hexo 主题 —— nexT 配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-23 12:37:02 / 修改时间：13:58:11" itemprop="dateCreated datePublished" datetime="2020-05-23T12:37:02+08:00">2020-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>对于 hexo 最火的主题 nexT，它的配置在 nexT 目录下的 <code>_config.xml</code> 主题配置文件中</p>
+<h2 id="scheme"><a href="#scheme" class="headerlink" title="scheme"></a>scheme</h2><p>nexT 有 4种 scheme，分别为 Muse、Mist、Pisces、Gemini，默认为 Muse ，我个人认为 Gemini 最好看。若想切换 scheme 只需简单地修改注释即可：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 默认</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="comment">#scheme: Gemini</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 根据个人喜好修改</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Schemes</span></span><br><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="comment">#scheme: Pisces</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Gemini</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/23/hexo-next-config/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/sql-advance-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/sql-advance-1/" class="post-title-link" itemprop="url">SQL 进阶（1）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-23 10:44:28 / 修改时间：18:00:12" itemprop="dateCreated datePublished" datetime="2020-05-23T10:44:28+08:00">2020-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先创建一个名为 <code>website</code> 的数据表作为示例使用。</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>url</th>
+<th>alexa</th>
+<th>country</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Google</td>
+<td><a href="https://www.google.cm/" target="_blank" rel="noopener">https://www.google.cm/</a></td>
+<td>1</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>2</td>
+<td>淘宝</td>
+<td><a href="https://www.taobao.com/" target="_blank" rel="noopener">https://www.taobao.com/</a></td>
+<td>13</td>
+<td>CN</td>
+</tr>
+<tr>
+<td>3</td>
+<td>菜鸟教程</td>
+<td><a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a></td>
+<td>4689</td>
+<td>CN</td>
+</tr>
+<tr>
+<td>4</td>
+<td>微博</td>
+<td><a href="http://weibo.com/" target="_blank" rel="noopener">http://weibo.com/</a></td>
+<td>20</td>
+<td>CN</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Facebook</td>
+<td><a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a></td>
+<td>3</td>
+<td>USA</td>
+</tr>
+</tbody></table>
+<h2 id="SELECT-TOP，LIMIT，ROWNUM-子句"><a href="#SELECT-TOP，LIMIT，ROWNUM-子句" class="headerlink" title="SELECT TOP，LIMIT，ROWNUM 子句"></a>SELECT TOP，LIMIT，ROWNUM 子句</h2><p><code>SELECT TOP</code> 子句用于规定要返回的记录的数目，不过并非所有的数据库系统都支持 <code>SELECT TOP</code> 语句。<br><code>MySQL</code> 支持 <code>LIMIT</code> 语句来选取指定的条数数据<br><code>Oracle</code> 可以使用 <code>ROWNUM</code> 来选取。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/23/sql-advance-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/sql-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/sql-base/" class="post-title-link" itemprop="url">SQL 基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-23 00:18:15 / 修改时间：15:37:48" itemprop="dateCreated datePublished" datetime="2020-05-23T00:18:15+08:00">2020-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-什么是-SQL"><a href="#1-什么是-SQL" class="headerlink" title="1. 什么是 SQL"></a>1. 什么是 SQL</h2><blockquote>
+<p>结构化查询语言(Structured Query Language)简称 SQL ，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统。</p>
+</blockquote>
+<h3 id="如何创建一个数据库"><a href="#如何创建一个数据库" class="headerlink" title="如何创建一个数据库"></a>如何创建一个数据库</h3><p>创建数据库要使用 <code>CREATE DATABASE</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> database_name;</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库中的表要使用 <code>CREATE TABLE</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> table_name(</span><br><span class="line">    col1 <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">    col2 <span class="built_in">int</span>(<span class="number">32</span>),</span><br><span class="line">    ...</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/23/sql-base/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/node-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/node-start/" class="post-title-link" itemprop="url">Node.js 的安装及基本配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 21:51:45" itemprop="dateCreated datePublished" datetime="2020-05-22T21:51:45+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-23 13:59:36" itemprop="dateModified" datetime="2020-05-23T13:59:36+08:00">2020-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>Node.js</code> 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。在之前的 JavaScript 的学习中，一般在浏览器中调试 JavaScript 程序，这是因为浏览器中内置了 JavaScript 的运行环境。有了 <code>Node.js</code> 后 JavaScript 有了另外的运行环境，使得 JavaScript 的领域变得更广。</p>
 <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><blockquote>
 <p>官方下载：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>淘宝镜像：<a href="https://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node</a></p>
 </blockquote>
 <p>安装完成后可以在终端中输入 <code>node -v</code> ，若输出版本号则表示安装成功。</p>
-<h2 id="2-修改-npm-默认仓库路径与环境变量"><a href="#2-修改-npm-默认仓库路径与环境变量" class="headerlink" title="2. 修改 npm 默认仓库路径与环境变量"></a>2. 修改 npm 默认仓库路径与环境变量</h2><p><code>npm</code> 于 <code>node</code> 就如同 <code>pip</code> 于 <code>python</code> 一样，<code>npm</code> 是随同 <code>node</code> 一起安装的包管理工具，可以下载别人发布上去的库等。<br><code>npm</code> 的中央仓库默认为 <code>https://registry.npmjs.org/</code> ，基于众所周知的原因，默认中央仓库的下载速度往往很慢。还有 <code>npm</code> 全局仓库的默认路径为 <code>~\AppData\Roaming\npm</code>，鉴于一般 PC 机的情况，这个路径也不是很好。<br>不过， <code>npm</code> 可以设置中央仓库以及全局仓库路径。打开 <code>node</code> 的安装目录，打开文件 <code>node_modules\npm\npmrc</code> ，写入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">registry&#x3D;&quot;https:&#x2F;&#x2F;registry.npm.taobao.org&#x2F;&quot;</span><br><span class="line">prefix&#x3D;D:\Program Files\nodejs\node_global</span><br><span class="line">cache&#x3D;D:\Program Files\nodejs\node_cache</span><br></pre></td></tr></table></figure>
-
-<p>依次是设置中央仓库为淘宝镜像，以及设置全局仓库路径和缓存路径。对于后两者，要创建对应的文件夹。</p>
-<h2 id="3-修改环境变量中的全局环境路径"><a href="#3-修改环境变量中的全局环境路径" class="headerlink" title="3. 修改环境变量中的全局环境路径"></a>3. 修改环境变量中的全局环境路径</h2><p>在 <code>node</code> 的安装过程中，安装包会把默认全局仓库的路径添加进环境变量，以便可以通过命令行去运行一些全局仓库里面的包。但是经过上面的操作，全局仓库路径被更改，所以要去更新。<br>右键我的电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量，打开环境变量设置窗口，全局仓库的路径被设置在用户变量的 <code>Path</code> 中</p>
-<img src="/2020/05/22/node-start/npm1.png" class="" title="npm 全局仓库默认路径">
-
-<p>将其修改为设置后的全局仓库路径</p>
-<img src="/2020/05/22/node-start/npm2.jpg" class="" title="npm 全局仓库修改后的路径">
-
-<p>至此，<code>node</code> 的基本配置结束。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/node-start/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
     
     
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/node-js/">node.js</a>
-    </span>
     
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    
-    <h3 class="article-title"><a href="/2020/05/22/git-start/"><span>git 的安装及基本配置</span></a></h3>
-    
+  
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/05/22/git-start/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-05-22T12:10:14.000Z">
-          2020-05-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
       
-        <p><code>git</code> 是什么就不多说了，直接开始</p>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/git-start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/git-start/" class="post-title-link" itemprop="url">git 的安装及基本配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 20:10:14" itemprop="dateCreated datePublished" datetime="2020-05-22T20:10:14+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-23 14:39:26" itemprop="dateModified" datetime="2020-05-23T14:39:26+08:00">2020-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>git</code> 是什么就不多说了，直接开始</p>
 <h2 id="1-git-镜像下载"><a href="#1-git-镜像下载" class="headerlink" title="1. git 镜像下载"></a>1. git 镜像下载</h2><p>在有些时候 <code>git</code> 的<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载官网</a>会访问不了，或者下载速度很慢，这个时候需要采用其他镜像地址（比如淘宝的 <a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a>）去下载。<br>安装时，除了路径，其余均用默认项即可。<br>安装完成后可以在终端中输入 <code>git version</code> ，若输出版本号则表示安装成功。</p>
-<h2 id="2-配置全局用户名和邮箱"><a href="#2-配置全局用户名和邮箱" class="headerlink" title="2. 配置全局用户名和邮箱"></a>2. 配置全局用户名和邮箱</h2><p><code>git</code> 无论是提交还是拷贝，都需要配置用户名和邮箱</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"username"</span>  </span><br><span class="line">git config --global user.email <span class="string">"aaa@xxx.com"</span></span><br></pre></td></tr></table></figure>
-
-<p><code>--global</code> 表示全局的，即当前用户下的所有仓库都有效。该配置会出现在 <code>~/.gitconfig</code> 中，打开后会发现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    email &#x3D; aaa@xxx.com</span><br><span class="line">    name &#x3D; username</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-局部配置"><a href="#2-1-局部配置" class="headerlink" title="2.1 局部配置"></a>2.1 局部配置</h3><p>作为全局配置的反面，局部配置就是不加 <code>--global</code>，即：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"username"</span>  </span><br><span class="line">git config user.email <span class="string">"aaa@xxx.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>局部配置只对当前仓库起效的，它的配置信息会在当前仓库的 <code>.gitconfig</code> 下。<br>当局部配置与全局配置同时存在时，局部配置的优先级更高。</p>
-<h2 id="3-配置-ssh-key"><a href="#3-配置-ssh-key" class="headerlink" title="3. 配置 ssh key"></a>3. 配置 ssh key</h2><p>若想把本地仓库 push 到 <code>github</code> 上，以及其他的一些行为，还需要配置 <code>git</code> 与 <code>github</code> 的 <code>ssh key</code> 。<br>执行 <code>ssh-keygen -t rsa -C &quot;aaa@xxx.com&quot;</code> ，进行三次或四次直接确认：</p>
-<ol>
-<li>确认秘钥的保存路径（如果不需要改路径则直接回车）；</li>
-<li>如果上一步置顶的保存路径下已经有秘钥文件，则需要确认是否覆盖（如果之前的秘钥不再需要则直接回车覆盖，如需要则手动拷贝到其他目录后再覆盖）；</li>
-<li>创建密码（如果不需要密码则直接回车）；</li>
-<li>确认密码；</li>
-</ol>
-<p>确认完毕后，在 <code>~/.ssh</code> 下会生成两个文件，分别是私钥 <code>id_rsa</code> 与 公钥 <code>id_rsa.pub</code> 。<br>接下来，打开 <code>github</code> ，进入设置页</p>
-<img src="/2020/05/22/git-start/ssh_key_1.jpg" class="" title="github添加密钥">
-
-<p>再选择 <code>SSH and GPG keys</code></p>
-<img src="/2020/05/22/git-start/ssh_key_2.png" class="" title="github添加密钥">
-
-<p>点击右上角的 <code>New SSH key</code> 创建一个 key</p>
-<img src="/2020/05/22/git-start/ssh_key_3.png" class="" title="github添加密钥">
-
-<p>用记事本或者其他文本编辑器打开公钥 <code>id_rsa.pub</code> , 将里面的内容复制粘贴到下图红线内的框内，写好 <code>title</code> 后添加</p>
-<img src="/2020/05/22/git-start/ssh_key_4.png" class="" title="github添加密钥">
-
-<p>至此，<code>github</code> 的密钥添加完毕，<code>git</code> 可以正常地将项目推送到 <code>github</code> 上了。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/git-start/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
     
     
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/git/">git</a>
-    </span>
     
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    
-    <h3 class="article-title"><a href="/2020/05/22/hexo-config1/"><span>hexo 配置（1）—— 网站配置、更新主题等</span></a></h3>
-    
+  
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/05/22/hexo-config1/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-05-22T06:31:21.000Z">
-          2020-05-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
       
-        <p>在 _config.yml 中可以修改大部份的配置。</p>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/hexo-config-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/hexo-config-1/" class="post-title-link" itemprop="url">hexo 配置（1）—— 网站配置、更新主题等</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 14:31:21" itemprop="dateCreated datePublished" datetime="2020-05-22T14:31:21+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-23 13:59:08" itemprop="dateModified" datetime="2020-05-23T13:59:08+08:00">2020-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在 _config.yml 中可以修改大部份的配置。</p>
 <h2 id="1-网站配置（Site）"><a href="#1-网站配置（Site）" class="headerlink" title="1 网站配置（Site）"></a>1 网站配置（Site）</h2><p>在 <code>_config.yml</code> 中 <code>#Site</code> 下的字段就是网站配置的字段，分别对应：</p>
 <table>
 <thead>
@@ -276,79 +855,87 @@
 
 <p>然后修改 <code>_config.yml</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">nexT</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3-新建标签、分类、归档等页面"><a href="#3-新建标签、分类、归档等页面" class="headerlink" title="3. 新建标签、分类、归档等页面"></a>3. 新建标签、分类、归档等页面</h2><p>一般的博客都具有根据 <code>tags</code> 、<code>categories</code> 进行分类的页面，接下来就是设置这样的页面。<br>以 <code>tags</code> 为例，建立以 <code>tags</code> 为分类的页面需要执行 <code>hexo new page tags</code> ，然后修改生成的 <code>source/tags/index.md</code>：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2020-05-22 18:27:43</span><br><span class="line">layout: tags</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>然后在 <code>_config.yml</code> 添加如下设置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br></pre></td></tr></table></figure>
-
-<p>即可完成分类页面的功能，其他如 <code>categories</code>、<code>archives</code> 也是同理。</p>
-<h2 id="4-资源文件夹"><a href="#4-资源文件夹" class="headerlink" title="4. 资源文件夹"></a>4. 资源文件夹</h2><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。<br>当你的博客想要插入一些图片，最简单的方式就是把图片放在 <code>source/images</code> 中，然后通过类似于 <code>![](/images/image.jpg)</code> 的方式访问。</p>
-<h3 id="4-1-文章资源文件夹"><a href="#4-1-文章资源文件夹" class="headerlink" title="4.1 文章资源文件夹"></a>4.1 文章资源文件夹</h3><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，<code>Hexo</code> 也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>当资源文件管理功能打开后，<code>Hexo</code> 将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个 markdown 文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
-<h3 id="4-2-相对路径引用的标签插件"><a href="#4-2-相对路径引用的标签插件" class="headerlink" title="4.2 相对路径引用的标签插件"></a>4.2 相对路径引用的标签插件</h3><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在 <code>Hexo 3</code> 之后，许多新的标签插件被加入到了核心代码中，这使得可以更简单地在文章中引用资源</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>引用资源文件夹里的图片需使用 <code>asset_img</code> 标签，其格式如下：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img 图片名.jpg 这是图片的说明 %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过这种方式，图片将能同时出现在文章和主页以及归档页中。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/hexo-config-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
     
     
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/hexo/">hexo</a>
-    </span>
     
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    
-    <h3 class="article-title"><a href="/2020/05/22/github-pages-hexo/"><span>用 hexo 在 Github Pages 上搭建个人博客</span></a></h3>
-    
+  
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/05/22/github-pages-hexo/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-05-22T02:32:32.000Z">
-          2020-05-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
       
-        <h2 id="0-开始前的准备"><a href="#0-开始前的准备" class="headerlink" title="0. 开始前的准备"></a>0. 开始前的准备</h2><p>在开始正式步骤前 ，应先在 PC 机上安装并配置（如环境变量等）以下两个软件：</p>
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/github-pages-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/github-pages-hexo/" class="post-title-link" itemprop="url">用 hexo 在 Github Pages 上搭建个人博客</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 10:32:32" itemprop="dateCreated datePublished" datetime="2020-05-22T10:32:32+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-23 14:38:47" itemprop="dateModified" datetime="2020-05-23T14:38:47+08:00">2020-05-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0-开始前的准备"><a href="#0-开始前的准备" class="headerlink" title="0. 开始前的准备"></a>0. 开始前的准备</h2><p>在开始正式步骤前 ，应先在 PC 机上安装并配置好以下两个软件：</p>
 <ul>
 <li>git</li>
 <li>node.js</li>
@@ -356,92 +943,193 @@
 <h2 id="1-新建仓库"><a href="#1-新建仓库" class="headerlink" title="1. 新建仓库"></a>1. 新建仓库</h2><p>在自己的 github 上新建名为 <code>&lt;user-name&gt;</code>.github.io 的 public 仓库。</p>
 <h2 id="2-搭建本地博客环境"><a href="#2-搭建本地博客环境" class="headerlink" title="2. 搭建本地博客环境"></a>2. 搭建本地博客环境</h2><h3 id="2-1-安装-hexo"><a href="#2-1-安装-hexo" class="headerlink" title="2.1 安装 hexo"></a>2.1 安装 hexo</h3><p>使用 <code>npm</code> 全局安装 <code>hexo-cli</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-初始化项目"><a href="#2-2-初始化项目" class="headerlink" title="2.2 初始化项目"></a>2.2 初始化项目</h3><p>在你想创建博客项目的目录下打开终端，并键入以下命令，其中 <code>&lt;folder&gt;</code> 是项目文件夹名。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br><span class="line"><span class="built_in">cd</span> &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>其中，最后一步的 <code>npm install</code> 是为了下载搭建博客项目所需要的一些工具（比如 <code>hexo-server</code>）。</p>
-<h2 id="3-部署"><a href="#3-部署" class="headerlink" title="3. 部署"></a>3. 部署</h2><p>项目中的 <code>source\_posts</code> 目录，就是写博客的地方。里面自带一个名为 <code>hello-world.md</code> 的初始博客文档，所有的博客都是项目根据里面的 <code>markdown</code> 文档生成的。<br>（如果想直接部署可以不管）在修改博客文档（详情见 <strong>4. 新建博客文档</strong>）后，应按照以下步骤将其部署至 Github 上：</p>
-<p>首先，打开项目中的 <code>_config.yml</code> 文件，找到 <code>deploy</code> 字段，并按照以下的形式填写完整：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">你的仓库地址</span> <span class="comment"># https://github.com/&lt;user-name&gt;/&lt;user-name&gt;.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，还需通过 npm 去下载一个工具 <code>hexo-deployer-git</code> ，把项目推到 github 上。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>安装后，依次键入以下命令即可部署到 github 。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>部署完成后，打开浏览器输入 <code>https://&lt;user-name&gt;.github.io/</code> 即可看到效果。<br>当出现 404 时，只需再等一会儿，根据官方 <a href="https://help.github.com/en/github/working-with-github-pages/creating-a-github-pages-site" target="_blank" rel="noopener">Github Pages</a> 的文档，需要花费 20 分钟以内的时间以更新你的网站。</p>
-<blockquote>
-<p>Note: It can take up to 20 minutes for changes to your site to publish after you push the changes to GitHub.</p>
-</blockquote>
-<p>至此，已经完成了个人博客的搭建及部署。</p>
-<h3 id="3-1-通过-hexo-server-本地查看效果"><a href="#3-1-通过-hexo-server-本地查看效果" class="headerlink" title="3.1 通过 hexo-server 本地查看效果"></a>3.1 通过 hexo-server 本地查看效果</h3><p>在部署到 github 前，如果想先看看博客的效果可通过 <code>hexo-server</code> 先部署到本地。如果没有，需先下载安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-server --save</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后，输入以下命令以启动服务器，网站会在 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 下启动。在服务器启动期间，Hexo 会监视文件变动并自动更新，无须重启服务器。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<p>如果想要修改端口，可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -p 5000</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-部署优化"><a href="#3-2-部署优化" class="headerlink" title="3.2 部署优化"></a>3.2 部署优化</h3><p>每次都要执行 <code>hexo clean</code> 和 <code>hexo deploy</code>，不如写个脚本。<br>在项目中的 <code>package.json</code> 里更新如下：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  "push": "hexo clean &amp; hexo deploy"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>部署命令为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run push</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-新建博客文档"><a href="#4-新建博客文档" class="headerlink" title="4. 新建博客文档"></a>4. 新建博客文档</h2><p>可以执行以下命令来创建一篇新文章：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>title</code> 表示文件名和博客标题。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/github-pages-hexo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-    
-    
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/github/">github</a><a href="/tags/hexo/">hexo</a>
-    </span>
-    
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
-
-    
-  </div>
-</article>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-
-
-<nav class="pagination">
-  
-  
-</nav>
+      </div>
     </main>
 
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2020 xiaoyh
-    
-  </p>
-</footer>
-    
-  </div>
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
 </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
 </body>
 </html>
