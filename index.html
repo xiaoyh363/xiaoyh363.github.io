@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/mysql-lock/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/sql-advance-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,472 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/23/mysql-lock/" class="post-title-link" itemprop="url">面试题 —— 乐观锁与悲观锁</a>
+            <a href="/2020/05/24/sql-advance-4/" class="post-title-link" itemprop="url">SQL 进阶（4）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 22:20:29" itemprop="dateCreated datePublished" datetime="2020-05-24T22:20:29+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 10:51:21" itemprop="dateModified" datetime="2020-05-25T10:51:21+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h2><p>SQL 约束用于规定表中的数据规则。如果存在违反约束的数据行为，行为会被约束终止。</p>
+<p>约束可以在创建表时规定（通过 <code>CREATE TABLE</code> 语句），或者在表创建之后规定（通过 <code>ALTER TABLE</code> 语句）。</p>
+<h3 id="NOT-NULL"><a href="#NOT-NULL" class="headerlink" title="NOT NULL"></a>NOT NULL</h3><p><code>NOT NULL</code> 约束强制字段不接受 NULL 值，即强制字段始终有值。</p>
+<p>这意味着，如果不向字段添加值，就无法插入新记录或者更新记录。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/sql-advance-4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/interview-sql-index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/24/interview-sql-index/" class="post-title-link" itemprop="url">面试题 —— 索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 21:52:16" itemprop="dateCreated datePublished" datetime="2020-05-24T21:52:16+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 15:39:26" itemprop="dateModified" datetime="2020-05-25T15:39:26+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h2><p>以字典为例，普通的数据库查找，就如同从字典的第一页往后翻去找一个字一样，需要从数据表的第一行开始顺序查找下去。表越大，消耗的时间就越长。</p>
+<p>因此查阅字典一般都是通过目录直接定位到查找的值，索引可以理解为数据库的目录，用于提高数据库的查阅速度。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提高了数据库的查询效率；</p>
+<p>缺点：会降低数据库更新的效率，因为需要修改索引文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/interview-sql-index/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/sql-advance-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/24/sql-advance-3/" class="post-title-link" itemprop="url">SQL 进阶（3）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 18:22:33" itemprop="dateCreated datePublished" datetime="2020-05-24T18:22:33+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 02:22:09" itemprop="dateModified" datetime="2020-05-25T02:22:09+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引可以大大提高 SQL 的检索速度，用户无法看到索引，它们只能被用来加速搜索/查询。</p>
+<p>拿汉语字典打比方，我们可以按拼音、笔画、偏旁部首等排序的目录（索引）快速查找到需要的字。</p>
+<p>建立索引会占用磁盘空间的索引文件。所以，虽然索引提高了查询速度，但同时也会降低更新表的速度。因为更新表时，MySQL 不仅要保存数据，还要保存索引文件。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/sql-advance-3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/sql-advance-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/24/sql-advance-2/" class="post-title-link" itemprop="url">SQL 进阶（2）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-24 13:50:18 / 修改时间：21:49:00" itemprop="dateCreated datePublished" datetime="2020-05-24T13:50:18+08:00">2020-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先创建一个数据表 access_log</p>
+<table>
+<thead>
+<tr>
+<th>aid</th>
+<th>site_id</th>
+<th>count</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>45</td>
+<td>2016-05-10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>100</td>
+<td>2016-05-13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>230</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>10</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>205</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>6</td>
+<td>4</td>
+<td>13</td>
+<td>2016-05-15</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>220</td>
+<td>2016-05-15</td>
+</tr>
+<tr>
+<td>8</td>
+<td>5</td>
+<td>545</td>
+<td>2016-05-16</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3</td>
+<td>201</td>
+<td>2016-05-17</td>
+</tr>
+</tbody></table>
+<h2 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h2><p><code>GROUP BY</code> 语句根据一个或多个列对结果集进行分组。在分组的列上可以使用 COUNT、SUM、AVG 等函数。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/sql-advance-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/interview-mysql-storage-engine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/24/interview-mysql-storage-engine/" class="post-title-link" itemprop="url">面试题 —— MySQL 的存储引擎</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 11:18:42" itemprop="dateCreated datePublished" datetime="2020-05-24T11:18:42+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 12:10:16" itemprop="dateModified" datetime="2020-05-25T12:10:16+08:00">2020-05-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什么是存储引擎"><a href="#什么是存储引擎" class="headerlink" title="什么是存储引擎"></a>什么是存储引擎</h2><p>数据库存储引擎是数据库底层软件组件，DBMS（数据库管理系统）使用数据引擎进行创建、查询、更新和删除数据操作。不同的存储引擎提供不同的存储机制、索引技巧、锁定水平等功能，使用不同的存储引擎还可以获得特定的功能。</p>
+<p>比如，在研究临时数据时，就应该使用<strong>内存存储引擎</strong>。<strong>内存存储引擎</strong>能够在内存中存储所有的表格数据。  </p>
+<p>再比如，在某些场景需要<strong>支持事务的存储引擎</strong>，以确保事务处理不成功时数据能够回滚。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/24/interview-mysql-storage-engine/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/interview-optimistic-pessimistic-lock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/23/interview-optimistic-pessimistic-lock/" class="post-title-link" itemprop="url">面试题 —— 乐观锁与悲观锁</a>
         </h2>
 
         <div class="post-meta">
@@ -189,7 +654,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-24 02:10:07" itemprop="dateModified" datetime="2020-05-24T02:10:07+08:00">2020-05-24</time>
+                <time title="修改时间：2020-05-24 02:21:26" itemprop="dateModified" datetime="2020-05-24T02:21:26+08:00">2020-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,7 +680,7 @@
           <h2 id="什么是乐观锁"><a href="#什么是乐观锁" class="headerlink" title="什么是乐观锁"></a>什么是乐观锁</h2><p>乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/23/mysql-lock/#more" rel="contents">
+              <a class="btn" href="/2020/05/23/interview-optimistic-pessimistic-lock/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -239,7 +704,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/mysql-transaction/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/interview-transaction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -253,7 +718,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/23/mysql-transaction/" class="post-title-link" itemprop="url">MySQL 面试题 —— 事务</a>
+            <a href="/2020/05/23/interview-transaction/" class="post-title-link" itemprop="url">面试题 —— 事务</a>
         </h2>
 
         <div class="post-meta">
@@ -262,10 +727,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-23 18:02:33 / 修改时间：23:40:06" itemprop="dateCreated datePublished" datetime="2020-05-23T18:02:33+08:00">2020-05-23</time>
+              <time title="创建时间：2020-05-23 18:02:33" itemprop="dateCreated datePublished" datetime="2020-05-23T18:02:33+08:00">2020-05-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-24 02:17:29" itemprop="dateModified" datetime="2020-05-24T02:17:29+08:00">2020-05-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -287,10 +758,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="MYSQL-的事务处理"><a href="#MYSQL-的事务处理" class="headerlink" title="MYSQL 的事务处理"></a>MYSQL 的事务处理</h2>
+          <h2 id="MYSQL-的事务处理"><a href="#MYSQL-的事务处理" class="headerlink" title="MYSQL 的事务处理"></a>MYSQL 的事务处理</h2><p>事务是一个最小的不可再分的工作单元，通常一个事务对应一个完整的业务。以转账操作为例，常见的转账操作一般对应如下 <code>SQL</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- A: 500  B: 100， A 向 B 转 100</span></span><br><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> balance=balance<span class="number">-100</span> <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'A'</span>;</span><br><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> balance=balance+<span class="number">100</span> <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'B'</span>;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/23/mysql-transaction/#more" rel="contents">
+              <a class="btn" href="/2020/05/23/interview-transaction/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -414,10 +886,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-23 10:44:28 / 修改时间：18:00:12" itemprop="dateCreated datePublished" datetime="2020-05-23T10:44:28+08:00">2020-05-23</time>
+              <time title="创建时间：2020-05-23 10:44:28" itemprop="dateCreated datePublished" datetime="2020-05-23T10:44:28+08:00">2020-05-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 17:21:13" itemprop="dateModified" datetime="2020-05-25T17:21:13+08:00">2020-05-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -440,52 +918,8 @@
 
       
           <p>先创建一个名为 <code>website</code> 的数据表作为示例使用。</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>name</th>
-<th>url</th>
-<th>alexa</th>
-<th>country</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>Google</td>
-<td><a href="https://www.google.cm/" target="_blank" rel="noopener">https://www.google.cm/</a></td>
-<td>1</td>
-<td>USA</td>
-</tr>
-<tr>
-<td>2</td>
-<td>淘宝</td>
-<td><a href="https://www.taobao.com/" target="_blank" rel="noopener">https://www.taobao.com/</a></td>
-<td>13</td>
-<td>CN</td>
-</tr>
-<tr>
-<td>3</td>
-<td>菜鸟教程</td>
-<td><a href="http://www.runoob.com/" target="_blank" rel="noopener">http://www.runoob.com/</a></td>
-<td>4689</td>
-<td>CN</td>
-</tr>
-<tr>
-<td>4</td>
-<td>微博</td>
-<td><a href="http://weibo.com/" target="_blank" rel="noopener">http://weibo.com/</a></td>
-<td>20</td>
-<td>CN</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Facebook</td>
-<td><a href="https://www.facebook.com/" target="_blank" rel="noopener">https://www.facebook.com/</a></td>
-<td>3</td>
-<td>USA</td>
-</tr>
-</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| id | name         | url                       | alexa | country |</span><br><span class="line">+----+--------------+---------------------------+-------+---------+</span><br><span class="line">| 1  | Google       | https:&#x2F;&#x2F;www.google.cm&#x2F;    | 1     | USA     |</span><br><span class="line">| 2  | 淘宝          | https:&#x2F;&#x2F;www.taobao.com&#x2F;   | 13    | CN      |</span><br><span class="line">| 3  | 菜鸟教程      | http:&#x2F;&#x2F;www.runoob.com&#x2F;    | 4689  | CN      |</span><br><span class="line">| 4  | 微博          | http:&#x2F;&#x2F;weibo.com&#x2F;         | 20    | CN      |</span><br><span class="line">| 5  | Facebook     | https:&#x2F;&#x2F;www.facebook.com&#x2F; | 3     | USA     |</span><br><span class="line">| 7  | stackoverflow | http:&#x2F;&#x2F;stackoverflow.com&#x2F; |   0 | IND     |</span><br><span class="line">+----+---------------+---------------------------+-------+---------+</span><br></pre></td></tr></table></figure>
+
 <h2 id="SELECT-TOP，LIMIT，ROWNUM-子句"><a href="#SELECT-TOP，LIMIT，ROWNUM-子句" class="headerlink" title="SELECT TOP，LIMIT，ROWNUM 子句"></a>SELECT TOP，LIMIT，ROWNUM 子句</h2><p><code>SELECT TOP</code> 子句用于规定要返回的记录的数目，不过并非所有的数据库系统都支持 <code>SELECT TOP</code> 语句。<br><code>MySQL</code> 支持 <code>LIMIT</code> 语句来选取指定的条数数据<br><code>Oracle</code> 可以使用 <code>ROWNUM</code> 来选取。</p>
           <!--noindex-->
             <div class="post-button">
@@ -591,382 +1025,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/node-start/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/node-start/" class="post-title-link" itemprop="url">Node.js 的安装及基本配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 21:51:45" itemprop="dateCreated datePublished" datetime="2020-05-22T21:51:45+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 13:59:36" itemprop="dateModified" datetime="2020-05-23T13:59:36+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>Node.js</code> 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。在之前的 JavaScript 的学习中，一般在浏览器中调试 JavaScript 程序，这是因为浏览器中内置了 JavaScript 的运行环境。有了 <code>Node.js</code> 后 JavaScript 有了另外的运行环境，使得 JavaScript 的领域变得更广。</p>
-<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><blockquote>
-<p>官方下载：<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">https://nodejs.org/zh-cn/</a><br>淘宝镜像：<a href="https://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node</a></p>
-</blockquote>
-<p>安装完成后可以在终端中输入 <code>node -v</code> ，若输出版本号则表示安装成功。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/22/node-start/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/git-start/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/git-start/" class="post-title-link" itemprop="url">git 的安装及基本配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 20:10:14" itemprop="dateCreated datePublished" datetime="2020-05-22T20:10:14+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 14:39:26" itemprop="dateModified" datetime="2020-05-23T14:39:26+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><code>git</code> 是什么就不多说了，直接开始</p>
-<h2 id="1-git-镜像下载"><a href="#1-git-镜像下载" class="headerlink" title="1. git 镜像下载"></a>1. git 镜像下载</h2><p>在有些时候 <code>git</code> 的<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载官网</a>会访问不了，或者下载速度很慢，这个时候需要采用其他镜像地址（比如淘宝的 <a href="https://npm.taobao.org/mirrors/git-for-windows/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/git-for-windows/</a>）去下载。<br>安装时，除了路径，其余均用默认项即可。<br>安装完成后可以在终端中输入 <code>git version</code> ，若输出版本号则表示安装成功。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/22/git-start/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/hexo-config-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/hexo-config-1/" class="post-title-link" itemprop="url">hexo 配置（1）—— 网站配置、更新主题等</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 14:31:21" itemprop="dateCreated datePublished" datetime="2020-05-22T14:31:21+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 13:59:08" itemprop="dateModified" datetime="2020-05-23T13:59:08+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在 _config.yml 中可以修改大部份的配置。</p>
-<h2 id="1-网站配置（Site）"><a href="#1-网站配置（Site）" class="headerlink" title="1 网站配置（Site）"></a>1 网站配置（Site）</h2><p>在 <code>_config.yml</code> 中 <code>#Site</code> 下的字段就是网站配置的字段，分别对应：</p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>title</td>
-<td>网站标题</td>
-</tr>
-<tr>
-<td>subtitle</td>
-<td>网站副标题</td>
-</tr>
-<tr>
-<td>description</td>
-<td>网站描述，主要用于SEO，告诉搜索引擎一个关于您站点的简单描述</td>
-</tr>
-<tr>
-<td>author</td>
-<td>作者</td>
-</tr>
-<tr>
-<td>language</td>
-<td>网站使用的语言</td>
-</tr>
-<tr>
-<td>timezone</td>
-<td>网站时区。Hexo 默认使用电脑的时区。时区列表。比如说：America/New_York, Japan, 和 UTC 。</td>
-</tr>
-</tbody></table>
-<h2 id="2-更换主题皮肤"><a href="#2-更换主题皮肤" class="headerlink" title="2. 更换主题皮肤"></a>2. 更换主题皮肤</h2><p><code>_config.yml</code> 中的 <code>theme</code> 字段指定主题，其名字对应于 <code>themes</code> 目录下的文件夹名。<br>先下载主题（以 <code>nexT</code> 为例）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:iissnan/hexo-theme-next.git themes\nexT</span><br></pre></td></tr></table></figure>
-
-<p>然后修改 <code>_config.yml</code></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">nexT</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/22/hexo-config-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/github-pages-hexo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/github-pages-hexo/" class="post-title-link" itemprop="url">用 hexo 在 Github Pages 上搭建个人博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 10:32:32" itemprop="dateCreated datePublished" datetime="2020-05-22T10:32:32+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 14:38:47" itemprop="dateModified" datetime="2020-05-23T14:38:47+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0-开始前的准备"><a href="#0-开始前的准备" class="headerlink" title="0. 开始前的准备"></a>0. 开始前的准备</h2><p>在开始正式步骤前 ，应先在 PC 机上安装并配置好以下两个软件：</p>
-<ul>
-<li>git</li>
-<li>node.js</li>
-</ul>
-<h2 id="1-新建仓库"><a href="#1-新建仓库" class="headerlink" title="1. 新建仓库"></a>1. 新建仓库</h2><p>在自己的 github 上新建名为 <code>&lt;user-name&gt;</code>.github.io 的 public 仓库。</p>
-<h2 id="2-搭建本地博客环境"><a href="#2-搭建本地博客环境" class="headerlink" title="2. 搭建本地博客环境"></a>2. 搭建本地博客环境</h2><h3 id="2-1-安装-hexo"><a href="#2-1-安装-hexo" class="headerlink" title="2.1 安装 hexo"></a>2.1 安装 hexo</h3><p>使用 <code>npm</code> 全局安装 <code>hexo-cli</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/22/github-pages-hexo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1031,7 +1094,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1044,7 +1107,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

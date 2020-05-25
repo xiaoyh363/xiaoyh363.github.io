@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="先创建一个数据表 access_log    aid site_id count date    1 1 45 2016-05-10   2 3 100 2016-05-13   3 1 230 2016-05-14   4 2 10 2016-05-14   5 5 205 2016-05-14   6 4 13 2016-05-15   7 3 220 2016-05-15   8 5 545">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 进阶（2）">
+<meta property="og:url" content="http://yoursite.com/2020/05/24/sql-advance-2/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="先创建一个数据表 access_log    aid site_id count date    1 1 45 2016-05-10   2 3 100 2016-05-13   3 1 230 2016-05-14   4 2 10 2016-05-14   5 5 205 2016-05-14   6 4 13 2016-05-15   7 3 220 2016-05-15   8 5 545">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-24T05:50:18.000Z">
+<meta property="article:modified_time" content="2020-05-24T13:49:00.120Z">
+<meta property="article:author" content="xiaoyh">
+<meta property="article:tag" content="sql">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/24/sql-advance-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SQL 进阶（2） | xiaoyh 的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/sql-advance-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL 进阶（2）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-24 13:50:18 / 修改时间：21:49:00" itemprop="dateCreated datePublished" datetime="2020-05-24T13:50:18+08:00">2020-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>先创建一个数据表 access_log</p>
+<table>
+<thead>
+<tr>
+<th>aid</th>
+<th>site_id</th>
+<th>count</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>45</td>
+<td>2016-05-10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>100</td>
+<td>2016-05-13</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>230</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>10</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>205</td>
+<td>2016-05-14</td>
+</tr>
+<tr>
+<td>6</td>
+<td>4</td>
+<td>13</td>
+<td>2016-05-15</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3</td>
+<td>220</td>
+<td>2016-05-15</td>
+</tr>
+<tr>
+<td>8</td>
+<td>5</td>
+<td>545</td>
+<td>2016-05-16</td>
+</tr>
+<tr>
+<td>9</td>
+<td>3</td>
+<td>201</td>
+<td>2016-05-17</td>
+</tr>
+</tbody></table>
+<h2 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h2><p><code>GROUP BY</code> 语句根据一个或多个列对结果集进行分组。在分组的列上可以使用 COUNT、SUM、AVG 等函数。</p>
+<a id="more"></a>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col_name, fun(col_name) <span class="keyword">from</span> table_name</span><br><span class="line"><span class="keyword">where</span> col_name <span class="keyword">operator</span> <span class="keyword">value</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> col_name</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例演示"><a href="#实例演示" class="headerlink" title="实例演示"></a>实例演示</h3><p>统计 access_log 中各 site 的访问量</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> site_id, <span class="keyword">sum</span>(access_log.count) <span class="keyword">as</span> nums <span class="keyword">from</span> access_log</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> site_id;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>site_id</th>
+<th>count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>275</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>521</td>
+</tr>
+<tr>
+<td>4</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>750</td>
+</tr>
+</tbody></table>
+<h3 id="使用-WITH-ROLLUP"><a href="#使用-WITH-ROLLUP" class="headerlink" title="使用 WITH ROLLUP"></a>使用 WITH ROLLUP</h3><p><code>WITH ROLLUP</code> 可以实现在分组统计数据基础上再进行相同的统计（SUM、AVG、COUNT 等）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> site_id, <span class="keyword">sum</span>(access_log.count) <span class="keyword">as</span> nums <span class="keyword">from</span> access_log</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> site_id <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>site_id</th>
+<th>nums</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>275</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>521</td>
+</tr>
+<tr>
+<td>4</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>750</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>1571</td>
+</tr>
+</tbody></table>
+<p>其中 NULL 表示所有 site_id 的 count 的总和。</p>
+<p>可以使用 <code>coalesce(a,b,c)</code> 来设置一个取代 NULL 的名称</p>
+<blockquote>
+<p>如果a == null，则选择b；<br>如果b == null，则选择c；<br>如果a != null，则选择a；<br>如果a b c 都为 null ，则返回为 null。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">coalesce</span>(site_id, <span class="string">'总访问量'</span>), <span class="keyword">sum</span>(access_log.count) <span class="keyword">as</span> nums <span class="keyword">from</span> access_log</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> site_id <span class="keyword">with</span> <span class="keyword">rollup</span>;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>site_id</th>
+<th>nums</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>275</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>521</td>
+</tr>
+<tr>
+<td>4</td>
+<td>13</td>
+</tr>
+<tr>
+<td>5</td>
+<td>750</td>
+</tr>
+<tr>
+<td>总访问量</td>
+<td>1571</td>
+</tr>
+</tbody></table>
+<h2 id="HAVING-子句"><a href="#HAVING-子句" class="headerlink" title="HAVING 子句"></a>HAVING 子句</h2><p><code>HAVING</code> 语句通常与 <code>GROUP BY</code> 语句联合使用，用来筛选由 <code>GROUP BY</code> 语句返回的记录集。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> col_name, fun(col_name) <span class="keyword">from</span> table_name</span><br><span class="line"><span class="keyword">where</span> col_name <span class="keyword">operator</span> <span class="keyword">value</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> col_name</span><br><span class="line"><span class="keyword">having</span> fun(col_name) <span class="keyword">operator</span> <span class="keyword">value</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>HAVING</code> 语句的存在弥补了 <code>WHERE</code> 关键字不能与聚合函数联合使用的不足。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查询 access_log 表中 site_id 小于 4 且总访问量大于 200 的数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> site_id, <span class="keyword">sum</span>(access_log.count) <span class="keyword">as</span> nums <span class="keyword">from</span> access_log</span><br><span class="line"><span class="keyword">where</span> site_id &lt; <span class="number">4</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> site_id</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">sum</span>(access_log.count) &gt; <span class="number">200</span>;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>site_id</th>
+<th>nums</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>275</td>
+</tr>
+<tr>
+<td>3</td>
+<td>521</td>
+</tr>
+</tbody></table>
+<h2 id="查询语句执行顺序"><a href="#查询语句执行顺序" class="headerlink" title="查询语句执行顺序"></a>查询语句执行顺序</h2><p>一个查询语句同时出现了 <code>WHERE</code>、<code>GROUP BY</code>、<code>HAVING</code> 等语句的时候，执行顺序是：</p>
+<ol>
+<li>FROM &lt;left_table&gt;</li>
+<li>ON &lt;join_conditon&gt;（关联条件）</li>
+<li>JOIN &lt;right_table&gt;</li>
+<li><strong>WHERE</strong> &lt;where_conditon&gt;（筛选条件）</li>
+<li><strong>GROUP BY</strong> &lt;col_name&gt;（分组）</li>
+<li>聚合函数(col_name)（having 子句中的）</li>
+<li><strong>HAVING</strong> &lt;where_conditon&gt;（分组后筛选条件）</li>
+<li><strong>SELECT</strong></li>
+<li>DISTINCT（去重）</li>
+<li>UNION（合并）</li>
+<li>ORDER BY（排序）</li>
+<li>LIMIT（截取）</li>
+</ol>
+<p>根据以上的顺序，将查询语句分为大致三个顺序：</p>
+<h3 id="表拼接（1-3）"><a href="#表拼接（1-3）" class="headerlink" title="表拼接（1 ~ 3）"></a>表拼接（1 ~ 3）</h3><p>先加载左表，再判断关联条件，加载右表。</p>
+<h3 id="先筛后选（4-8）"><a href="#先筛后选（4-8）" class="headerlink" title="先筛后选（4 ~ 8）"></a>先筛后选（4 ~ 8）</h3><p>一句话总结：先根据条件语句先后筛选数据，再选择指定的字段。</p>
+<p>条件语句的执行顺序依次是 <code>WHERE</code>、<code>GROUP BY</code>、<code>HAVING</code>，这恰好是它们在 <code>SQL</code> 语句中的先后顺序。若 <code>HAVING</code> 中有聚合函数，则先执行聚合函数再执行 <code>HAVING</code></p>
+<p>筛选后，再通过 <code>SELECT</code> 语句查找指定字段</p>
+<h3 id="无条件筛选（9-12）"><a href="#无条件筛选（9-12）" class="headerlink" title="无条件筛选（9 ~ 12）"></a>无条件筛选（9 ~ 12）</h3><p>最后剩下的子句都是没有条件的筛选语句。<br>这样可以保证效率最高，比如如果在前面排序，显然会对无关的数据进行排序，降低效率。</p>
+<p>依次是：去重、合并、排序、范围截取</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql/" rel="tag"># sql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/24/interview-mysql-storage-engine/" rel="prev" title="面试题 —— MySQL 的存储引擎">
+      <i class="fa fa-chevron-left"></i> 面试题 —— MySQL 的存储引擎
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/24/sql-advance-3/" rel="next" title="SQL 进阶（3）">
+      SQL 进阶（3） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GROUP-BY-语句"><span class="nav-number">1.</span> <span class="nav-text">GROUP BY 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例演示"><span class="nav-number">1.1.</span> <span class="nav-text">实例演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-WITH-ROLLUP"><span class="nav-number">1.2.</span> <span class="nav-text">使用 WITH ROLLUP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HAVING-子句"><span class="nav-number">2.</span> <span class="nav-text">HAVING 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">2.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询语句执行顺序"><span class="nav-number">3.</span> <span class="nav-text">查询语句执行顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表拼接（1-3）"><span class="nav-number">3.1.</span> <span class="nav-text">表拼接（1 ~ 3）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先筛后选（4-8）"><span class="nav-number">3.2.</span> <span class="nav-text">先筛后选（4 ~ 8）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无条件筛选（9-12）"><span class="nav-number">3.3.</span> <span class="nav-text">无条件筛选（9 ~ 12）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="索引是什么以字典为例，普通的数据库查找，就如同从字典的第一页往后翻去找一个字一样，需要从数据表的第一行开始顺序查找下去。表越大，消耗的时间就越长。 因此查阅字典一般都是通过目录直接定位到查找的值，索引可以理解为数据库的目录，用于提高数据库的查阅速度。 索引的优缺点优点：提高了数据库的查询效率； 缺点：会降低数据库更新的效率，因为需要修改索引文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题 —— 索引">
+<meta property="og:url" content="http://yoursite.com/2020/05/24/interview-sql-index/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="索引是什么以字典为例，普通的数据库查找，就如同从字典的第一页往后翻去找一个字一样，需要从数据表的第一行开始顺序查找下去。表越大，消耗的时间就越长。 因此查阅字典一般都是通过目录直接定位到查找的值，索引可以理解为数据库的目录，用于提高数据库的查阅速度。 索引的优缺点优点：提高了数据库的查询效率； 缺点：会降低数据库更新的效率，因为需要修改索引文件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-24T13:52:16.000Z">
+<meta property="article:modified_time" content="2020-05-25T07:39:26.155Z">
+<meta property="article:author" content="xiaoyh">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="index">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/24/interview-sql-index/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试题 —— 索引 | xiaoyh 的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/24/interview-sql-index/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试题 —— 索引
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-24 21:52:16" itemprop="dateCreated datePublished" datetime="2020-05-24T21:52:16+08:00">2020-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 15:39:26" itemprop="dateModified" datetime="2020-05-25T15:39:26+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="索引是什么"><a href="#索引是什么" class="headerlink" title="索引是什么"></a>索引是什么</h2><p>以字典为例，普通的数据库查找，就如同从字典的第一页往后翻去找一个字一样，需要从数据表的第一行开始顺序查找下去。表越大，消耗的时间就越长。</p>
+<p>因此查阅字典一般都是通过目录直接定位到查找的值，索引可以理解为数据库的目录，用于提高数据库的查阅速度。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><p>优点：提高了数据库的查询效率；</p>
+<p>缺点：会降低数据库更新的效率，因为需要修改索引文件。</p>
+<a id="more"></a>
+
+<h2 id="索引的底层实现原理"><a href="#索引的底层实现原理" class="headerlink" title="索引的底层实现原理"></a>索引的底层实现原理</h2><p>索引有两种： BTREE 和 HASH。MyISAM 和 InnoDB 只支持 BTREE 索引；MEMORY 都支持，默认 HASH。</p>
+<h3 id="写在前面：磁盘-IO-与预读"><a href="#写在前面：磁盘-IO-与预读" class="headerlink" title="写在前面：磁盘 IO 与预读"></a>写在前面：磁盘 IO 与预读</h3><p>磁盘读取依靠的是机械运动，分为寻道时间、旋转延迟、传输时间三个部分，这三个部分耗时相加就是一次磁盘 IO 的时间，大概 9ms，这个成本是访问内存的<strong>十万倍</strong>左右。</p>
+<p>正是由于磁盘 IO 是非常昂贵的操作，所以计算机操作系统对此做了优化：<strong>预读</strong>。每一次 IO 时，不仅仅把当前磁盘地址的数据加载到内存，同时也把相邻数据也加载到内存缓冲区中。因为局部预读原理说明：当访问一个地址数据的时候，与其相邻的数据很快也会被访问到。</p>
+<p>每次磁盘 IO 读取的数据我们称之为一页（page）。一页的大小与操作系统有关，一般为 4k 或者 8k 。这也就意味着发生一次磁盘 IO 时实际会读取一页的数据。</p>
+<h3 id="什么是-BTREE"><a href="#什么是-BTREE" class="headerlink" title="什么是 BTREE"></a>什么是 BTREE</h3><p>BTREE 也叫 B 树，是一种多路平衡树。MySQL 的底层实现是 B+ 树。</p>
+<h3 id="B-树与-B-树的区别"><a href="#B-树与-B-树的区别" class="headerlink" title="B 树与 B+ 树的区别"></a>B 树与 B+ 树的区别</h3><ol>
+<li>B 树的子节点处于父节点所表示的开区间内，不会包含父节点的值。<br>B+ 树的子节点处于父节点所表示的闭区间中，且一定会包含父节点的值；</li>
+<li><strong>B 树的信息包含于每个节点。<br>B+ 树的信息全部包含于叶节点，且叶节点相连，组成一个有序链表；</strong></li>
+<li>B+ 树的最大元素始终位于根节点当中；</li>
+</ol>
+<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><h4 id="为什么使用-BTREE-而不是-HASH"><a href="#为什么使用-BTREE-而不是-HASH" class="headerlink" title="为什么使用 BTREE 而不是 HASH"></a>为什么使用 BTREE 而不是 HASH</h4><ol>
+<li>从内存角度上，数据库中的索引一般在磁盘上，数据量大的情况下会发生多次磁盘 IO，BTREE 的设计可以允许数据分批加载，极大地降低磁盘 IO 的次数；</li>
+<li>从业务场景上说，Hash 索引不能范围查询，因为经过 Hash 算法处理之后的 Hash 值的大小关系，并不能保证和 Hash 运算前完全一样；</li>
+<li>对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，所以只使用组合索引中的部分索引进行查询时无法走索引，不支持最左前缀匹配原则；</li>
+<li>HASH 冲突导致 HASH 索引无法避免表扫描且降低搜索效率。</li>
+</ol>
+<h4 id="为什么不用红黑树"><a href="#为什么不用红黑树" class="headerlink" title="为什么不用红黑树"></a>为什么不用红黑树</h4><p>树的查询时间跟树的高度有关，B+ 树是一棵多路搜索树可以降低树的高度，提高查找效率。</p>
+<h4 id="能否无限增加树的路数提高查找效率"><a href="#能否无限增加树的路数提高查找效率" class="headerlink" title="能否无限增加树的路数提高查找效率"></a>能否无限增加树的路数提高查找效率</h4><p>之所以设计成 BTREE，就是为了分批加载索引。如果设计成很多条路数，这样会形成一个庞大的有序数组，可能不能一次性加载到内存中。</p>
+<h4 id="为什么用-B-树不用-B-树"><a href="#为什么用-B-树不用-B-树" class="headerlink" title="为什么用 B+ 树不用 B 树"></a>为什么用 B+ 树不用 B 树</h4><p>数据库中 select 数据，不一定只选一条，很多时候会选中多条，比如选前 100 条数据，对于 B 树就得在找到起点后中序遍历，可能要跨层访问。而 B+ 树由于所有的数据都在叶节点不用跨层，直接通过链表就能取出前 100 条数据。</p>
+<h2 id="MySQL-索引有哪些"><a href="#MySQL-索引有哪些" class="headerlink" title="MySQL 索引有哪些"></a>MySQL 索引有哪些</h2><p>MYSQL的索引主要分为普通索引、唯一索引、组合索引、<strong>主键索引</strong>（PRIMARY KEY）、<strong>全文索引</strong>（FULLTEXT）。</p>
+<ul>
+<li>普通索引：是最基本的索引，没有限制。</li>
+<li>唯一索引：唯一索引不允许索引列有重复值，允许有空值。</li>
+<li><strong>主键索引</strong>：它是一种特殊的唯一索引，不允许有空值。在建表的时候若指定了主键，就会自动创建主键索引。</li>
+<li><strong>全文索引</strong>：全文索引用于全文搜索。只有 InnoDB 和 MyISAM 存储引擎支持全文索引，且仅适用于 CHAR， VARCHAR 和 TEXT 列。</li>
+</ul>
+<h3 id="主键索引与唯一索引的区别"><a href="#主键索引与唯一索引的区别" class="headerlink" title="主键索引与唯一索引的区别"></a>主键索引与唯一索引的区别</h3><ol>
+<li>主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有本质的差别；</li>
+<li>主键一定会创建一个唯一索引，但是有唯一索引的列不一定是主键；</li>
+<li>一个表只能有一个主键，但是可以有多个唯一索引；</li>
+</ol>
+<h3 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h3><p>以索引包含的列数划分，索引可以是单列索引，也可以是多列索引（也叫组合索引等）。</p>
+<p>若多列索引是唯一索引，则该索引的组合不能重复。</p>
+<h4 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h4><p>在建立多列索引时需要规定索引列的顺序，比如对列 a，b，c 建立多列索引 (a, b, c)。</p>
+<p>在此情况下，查询条件必须符合索引建立的顺序才能走索引查询。</p>
+<p>比如以下的查询语句并不会去查询索引树：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> c&lt;<span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_name <span class="keyword">where</span> b&lt;<span class="number">1</span> <span class="keyword">and</span> c&lt;<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以下三种才会走索引：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> a&lt;<span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> a&lt;<span class="number">1</span> <span class="keyword">and</span> b&lt;<span class="number">2</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> a&lt;<span class="number">1</span> <span class="keyword">and</span> b&lt;<span class="number">2</span> <span class="keyword">and</span> c&lt;<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出，所有走索引的查询语句都带有 a 字段。</p>
+<p>当创建形如 (a, b, c) 的多列索引，相当于创建了 (a) 单列索引，(a, b) 多列索引以及 (a, b, c) 多列索引，这就是最左前缀原则。</p>
+<p>多列索引的最左前缀原则导致其一个索引与多个索引等效，降低了磁盘空间的开销。</p>
+<p>对于如下的查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> a&lt;<span class="number">1</span> <span class="keyword">and</span> c&lt;<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>只会走 (a) 的单列索引，而不会走 c 。</p>
+<p><code>=</code> 和 <code>IN</code> 可以乱序，MySQL 的查询优化器会为此做优化。</p>
+<h3 id="全文索引"><a href="#全文索引" class="headerlink" title="全文索引"></a>全文索引</h3><p>如果希望通过关键字的匹配来进行查询，那么就需要基于相似度的查询。全文索引就是为这种场景设计的。</p>
+<p>与 <code>LIKE</code> 模糊匹配相比，全文索引要快很多，但是可能存在精度问题。</p>
+<p>MySQL 中的全文索引，有两个变量：最小搜索长度和最大搜索长度。</p>
+<p>对于长度小于最小搜索长度和大于最大搜索长度的词语，都不会被索引。通俗点说，想对一个词语使用全文索引搜索，那么这个词语的长度必须在以上两个变量的区间内。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; MySQL 中的最小搜索长度与最大搜索长度</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; MyISAM</span><br><span class="line">ft_min_word_len &#x3D; 4;</span><br><span class="line">ft_max_word_len &#x3D; 84;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; InnoDB</span><br><span class="line">innodb_ft_min_token_size &#x3D; 3;</span><br><span class="line">innodb_ft_max_token_size &#x3D; 84;</span><br></pre></td></tr></table></figure>
+
+<h2 id="聚集索引与非聚集索引"><a href="#聚集索引与非聚集索引" class="headerlink" title="聚集索引与非聚集索引"></a>聚集索引与非聚集索引</h2><p>聚集（clustered）索引的逻辑顺序与磁盘上数据行的物理存储顺序相同，一个表中只能拥有一个聚集索引。</p>
+<p>非聚集索引的逻辑顺序与磁盘上行的物理存储顺序不同，一个表中可以拥有多个非聚集索引。</p>
+<p>聚集索引就像是字典的拼音目录，拼音目录对应的 A-Z 的字顺序，和字典实际存储的字的顺序 A-Z 也是一样的，A 开头的字的后面一定是 B 开头的字。如果想插入一个 B 开头的字，那么肯定会按照拼音目录插到 A 开头的字的后面。</p>
+<p>非聚集索引就像字典的偏旁目录，它的顺序与实际存放顺序不一定一致。比如偏旁艹下面<strong>依次</strong>放着艺、劳、若，其对应的页数分别是 568，279，419，存储顺序并不是连续的。</p>
+<h3 id="主键索引与聚集索引的关系"><a href="#主键索引与聚集索引的关系" class="headerlink" title="主键索引与聚集索引的关系"></a>主键索引与聚集索引的关系</h3><p>在 MySQL 的 InnoDB 引擎中，主键索引就是聚集索引。</p>
+<p>但在 MyISAM 引擎里主键不是聚集索引。</p>
+<p>在 SQL Server 中，也是默认主键为聚集索引，但是可以显示的指定聚集索引。</p>
+<p>聚集索引决定了数据库的物理存储结构，而主键只是确定表格的逻辑组织方式。这两者不可混淆！</p>
+<p>对于 InnoDB ：</p>
+<ol>
+<li>如果一个主键被定义了，那么这个主键就是聚集索引;</li>
+<li>如果没有主键被定义，那么该表的第一个唯一非空索引被作为聚集索引；</li>
+<li>如果没有主键也没有合适的唯一索引，那么 InnoDB 内部会生成一个隐藏的主键作为聚集索引，这个隐藏的主键是一个 6 字节的自增列；</li>
+</ol>
+<h3 id="为什么推荐把自增主键作为聚集索引"><a href="#为什么推荐把自增主键作为聚集索引" class="headerlink" title="为什么推荐把自增主键作为聚集索引"></a>为什么推荐把自增主键作为聚集索引</h3><p>自增主键会把数据自动向后插入，避免了插入过程中的聚集索引的排序问题。</p>
+<p>聚集索引的排序，必然会带来大范围的数据的物理移动，这里面带来的磁盘 IO 性能损耗是非常大的。</p>
+<p>而如果聚集索引上的值可以改动的话，那么也会触发物理磁盘上的移动，所以也不应该修改聚集索引。</p>
+<h3 id="非聚集索引的二次查找问题"><a href="#非聚集索引的二次查找问题" class="headerlink" title="非聚集索引的二次查找问题"></a>非聚集索引的二次查找问题</h3><p>对于 InnoDB ，非聚集索引存储的是主键（聚集索引），所以通过非聚集索引查询时，第一次查询是通过非聚集索引找到主键，第二次查询是通过主键找到对应的行位置。</p>
+<p>不过，如果查找时只查找非聚集索引本身或者主键，就不会触发第二次查询，这称之为索引覆盖：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span>, index_name <span class="keyword">from</span> table_name <span class="keyword">where</span> index_name=<span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过组合索引，把想要查询的列包含进非聚集索引，就不会触发二次查询。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/sql/" rel="tag"># sql</a>
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/index/" rel="tag"># index</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/24/sql-advance-3/" rel="prev" title="SQL 进阶（3）">
+      <i class="fa fa-chevron-left"></i> SQL 进阶（3）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/24/sql-advance-4/" rel="next" title="SQL 进阶（4）">
+      SQL 进阶（4） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#索引是什么"><span class="nav-number">1.</span> <span class="nav-text">索引是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引的优缺点"><span class="nav-number">1.1.</span> <span class="nav-text">索引的优缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的底层实现原理"><span class="nav-number">2.</span> <span class="nav-text">索引的底层实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面：磁盘-IO-与预读"><span class="nav-number">2.1.</span> <span class="nav-text">写在前面：磁盘 IO 与预读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-BTREE"><span class="nav-number">2.2.</span> <span class="nav-text">什么是 BTREE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树与-B-树的区别"><span class="nav-number">2.3.</span> <span class="nav-text">B 树与 B+ 树的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些问题"><span class="nav-number">2.4.</span> <span class="nav-text">一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用-BTREE-而不是-HASH"><span class="nav-number">2.4.1.</span> <span class="nav-text">为什么使用 BTREE 而不是 HASH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么不用红黑树"><span class="nav-number">2.4.2.</span> <span class="nav-text">为什么不用红黑树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#能否无限增加树的路数提高查找效率"><span class="nav-number">2.4.3.</span> <span class="nav-text">能否无限增加树的路数提高查找效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么用-B-树不用-B-树"><span class="nav-number">2.4.4.</span> <span class="nav-text">为什么用 B+ 树不用 B 树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-索引有哪些"><span class="nav-number">3.</span> <span class="nav-text">MySQL 索引有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引与唯一索引的区别"><span class="nav-number">3.1.</span> <span class="nav-text">主键索引与唯一索引的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多列索引"><span class="nav-number">3.2.</span> <span class="nav-text">多列索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最左前缀原则"><span class="nav-number">3.2.1.</span> <span class="nav-text">最左前缀原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全文索引"><span class="nav-number">3.3.</span> <span class="nav-text">全文索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集索引与非聚集索引"><span class="nav-number">4.</span> <span class="nav-text">聚集索引与非聚集索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引与聚集索引的关系"><span class="nav-number">4.1.</span> <span class="nav-text">主键索引与聚集索引的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么推荐把自增主键作为聚集索引"><span class="nav-number">4.2.</span> <span class="nav-text">为什么推荐把自增主键作为聚集索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非聚集索引的二次查找问题"><span class="nav-number">4.3.</span> <span class="nav-text">非聚集索引的二次查找问题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
