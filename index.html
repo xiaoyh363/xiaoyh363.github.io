@@ -158,6 +158,169 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/interview-java-concurrency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/31/interview-java-concurrency/" class="post-title-link" itemprop="url">面试 —— Java 并发</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-31 13:29:28" itemprop="dateCreated datePublished" datetime="2020-05-31T13:29:28+08:00">2020-05-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-01 21:05:10" itemprop="dateModified" datetime="2020-06-01T21:05:10+08:00">2020-06-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h2><ul>
+<li>并行：多个任务在<strong>同一时刻</strong>进行</li>
+<li>并发：多个任务在<strong>同一段时间间隔</strong>进行</li>
+</ul>
+<p>举个例子，并行就是两个人分别做任务 A 与任务 B，因此在执行期间无论什么时刻这俩任务都在进行；<br>而并发是一个人，一会儿做一下任务 A，一会儿做一下任务 B，这只能保证某个时间段这俩任务都在进行。</p>
+<p>对于实际情况，CPU 在计算机中也是一种资源，作为资源实体的是 CPU 的时间片。当 CPU 时间片作为资源被分给进程时，进程里面的多个线程互相竞争 CPU 的时间片。</p>
+<p>而对于单核 CPU 而言，就相当于一个人做多个任务，那么显然多个线程是并发执行。<br>那么多核 CPU 自然是相当于多个人做多个任务。不过往往也不是纯粹的并行（比如我做任务 A，你做任务 B），而是并行与并发并存（我和你都是交替地做任务 A 和任务 B）。即使对于单线程，CPU 也不会只让一个核去执行，而是让多个核去合作执行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/31/interview-java-concurrency/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/interview-java-collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/26/interview-java-collections/" class="post-title-link" itemprop="url">面试 —— Java 容器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-26 18:47:48" itemprop="dateCreated datePublished" datetime="2020-05-26T18:47:48+08:00">2020-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-27 02:55:29" itemprop="dateModified" datetime="2020-05-27T02:55:29+08:00">2020-05-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>容器包括 Collection 和 Map 两种，Collection 存储对象的集合，而 Map 存储着键值对的集合。</p>
+<h2 id="Collection（接口）"><a href="#Collection（接口）" class="headerlink" title="Collection（接口）"></a>Collection（接口）</h2><p>Collection 下也包括 List 和 Set 两种：</p>
+<h3 id="List（接口）"><a href="#List（接口）" class="headerlink" title="List（接口）"></a>List（接口）</h3><p>List 是非常常用的数据类型，是有序的的 Collection。这里的有序指的是存入与取出的顺序一样，而不是指排序。</p>
+<p>一共有三个实现类：ArrayList、Vector、LinkedList。</p>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是最常用的 List 实现类，内部是通过数组实现的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/26/interview-java-collections/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/interview-cross-origin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -183,7 +346,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-26 14:31:01 / 修改时间：14:42:44" itemprop="dateCreated datePublished" datetime="2020-05-26T14:31:01+08:00">2020-05-26</time>
+              <time title="创建时间：2020-05-26 14:31:01 / 修改时间：18:19:15" itemprop="dateCreated datePublished" datetime="2020-05-26T14:31:01+08:00">2020-05-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,8 +369,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h1><p>a</p>
-
+          <h2 id="浏览器的同源策略"><a href="#浏览器的同源策略" class="headerlink" title="浏览器的同源策略"></a>浏览器的同源策略</h2><p>同源策略是一个重要的安全策略，它限制了从同一个源加载的文档或者脚本如何与另一个源的资源进行交互，这是一个用于隔离潜在恶意文件的重要安全机制。</p>
+<p>如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。</p>
+<h2 id="没有同源策略限制的两大危险场景"><a href="#没有同源策略限制的两大危险场景" class="headerlink" title="没有同源策略限制的两大危险场景"></a>没有同源策略限制的两大危险场景</h2><h3 id="没有同源策略限制的接口请求"><a href="#没有同源策略限制的接口请求" class="headerlink" title="没有同源策略限制的接口请求"></a>没有同源策略限制的接口请求</h3><p>当用户登录某知名网站 A 成功后会获取到 cookie，且 cookie 往往会在浏览器中存在很长的一段时间。</p>
+<p>黑客诱导用户访问自己的网站，并在自己的网站中藏有对网站 A 的恶意请求脚本（比如转账），由于每次浏览器发起请求都会带着 cookie，所以相当于黑客登录了你的账号。这种攻击方式也叫做 CSRF 攻击。</p>
+<h3 id="没有同源策略限制的-Dom-查询"><a href="#没有同源策略限制的-Dom-查询" class="headerlink" title="没有同源策略限制的 Dom 查询"></a>没有同源策略限制的 Dom 查询</h3><p>黑客在自己网站中嵌入（通过 iframe 等标签）网站 A 的敏感页面（如登录页面）伪装成网站 A，诱导用户登录自己的钓鱼网站并输入用户名和密码。</p>
+<p>其实同源策略对于这一点的影响不大，因为即使不嵌入，也可以仿造网站 A 的敏感页面直接写一个网站出来。</p>
+<h2 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h2>
       
     </div>
 
@@ -848,169 +1016,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/interview-optimistic-pessimistic-lock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/23/interview-optimistic-pessimistic-lock/" class="post-title-link" itemprop="url">面试题 —— 乐观锁与悲观锁</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-23 23:41:06" itemprop="dateCreated datePublished" datetime="2020-05-23T23:41:06+08:00">2020-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-24 02:21:26" itemprop="dateModified" datetime="2020-05-24T02:21:26+08:00">2020-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是乐观锁"><a href="#什么是乐观锁" class="headerlink" title="什么是乐观锁"></a>什么是乐观锁</h2><p>乐观锁在操作数据时非常乐观，每次读数据的时候都认为别人不会同时修改数据，所以不会上锁。只是在更新数据的时候，判断一下在此期间别人是否修改了数据，如果修改了则放弃更新，否则执行操作。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/23/interview-optimistic-pessimistic-lock/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/23/interview-transaction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xiaoyh">
-      <meta itemprop="description" content="个人博客">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyh 的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/23/interview-transaction/" class="post-title-link" itemprop="url">面试题 —— 事务</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-23 18:02:33" itemprop="dateCreated datePublished" datetime="2020-05-23T18:02:33+08:00">2020-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-24 02:17:29" itemprop="dateModified" datetime="2020-05-24T02:17:29+08:00">2020-05-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="MYSQL-的事务处理"><a href="#MYSQL-的事务处理" class="headerlink" title="MYSQL 的事务处理"></a>MYSQL 的事务处理</h2><p>事务是一个最小的不可再分的工作单元，通常一个事务对应一个完整的业务。以转账操作为例，常见的转账操作一般对应如下 <code>SQL</code> 语句：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- A: 500  B: 100， A 向 B 转 100</span></span><br><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> balance=balance<span class="number">-100</span> <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'A'</span>;</span><br><span class="line"><span class="keyword">update</span> table_name <span class="keyword">set</span> balance=balance+<span class="number">100</span> <span class="keyword">where</span> <span class="keyword">name</span>=<span class="string">'B'</span>;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/23/interview-transaction/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1080,7 +1085,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

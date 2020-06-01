@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="容器包括 Collection 和 Map 两种，Collection 存储对象的集合，而 Map 存储着键值对的集合。 Collection（接口）Collection 下也包括 List 和 Set 两种： List（接口）List 是非常常用的数据类型，是有序的的 Collection。这里的有序指的是存入与取出的顺序一样，而不是指排序。 一共有三个实现类：ArrayList、Vector、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试 —— Java 容器">
+<meta property="og:url" content="http://yoursite.com/2020/05/26/interview-java-collections/index.html">
+<meta property="og:site_name" content="xiaoyh 的个人博客">
+<meta property="og:description" content="容器包括 Collection 和 Map 两种，Collection 存储对象的集合，而 Map 存储着键值对的集合。 Collection（接口）Collection 下也包括 List 和 Set 两种： List（接口）List 是非常常用的数据类型，是有序的的 Collection。这里的有序指的是存入与取出的顺序一样，而不是指排序。 一共有三个实现类：ArrayList、Vector、">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-26T10:47:48.000Z">
+<meta property="article:modified_time" content="2020-05-26T18:55:29.719Z">
+<meta property="article:author" content="xiaoyh">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/26/interview-java-collections/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试 —— Java 容器 | xiaoyh 的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyh 的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个只会敲代码的咸鱼</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/interview-java-collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xiaoyh">
+      <meta itemprop="description" content="个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyh 的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试 —— Java 容器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-26 18:47:48" itemprop="dateCreated datePublished" datetime="2020-05-26T18:47:48+08:00">2020-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-27 02:55:29" itemprop="dateModified" datetime="2020-05-27T02:55:29+08:00">2020-05-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>容器包括 Collection 和 Map 两种，Collection 存储对象的集合，而 Map 存储着键值对的集合。</p>
+<h2 id="Collection（接口）"><a href="#Collection（接口）" class="headerlink" title="Collection（接口）"></a>Collection（接口）</h2><p>Collection 下也包括 List 和 Set 两种：</p>
+<h3 id="List（接口）"><a href="#List（接口）" class="headerlink" title="List（接口）"></a>List（接口）</h3><p>List 是非常常用的数据类型，是有序的的 Collection。这里的有序指的是存入与取出的顺序一样，而不是指排序。</p>
+<p>一共有三个实现类：ArrayList、Vector、LinkedList。</p>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p>ArrayList 是最常用的 List 实现类，内部是通过数组实现的。</p>
+<a id="more"></a>
+
+<p>创建 ArrayList 时，会创建一个数组用于存放元素，这个初始数组的大小叫做默认初始容量。ArrayList 的默认初始容量是 10 。</p>
+<p>当数组元素的数量要超过容量时，就需要扩容。扩容的方法是创建一个当前容量的 1.5 倍的新数组，然后将原数组的数据复制到新数组中。这个 1.5 也叫做扩容因子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ArrayList 源码</span></span><br><span class="line"><span class="comment">// 加上自己的一半，就是 1.5 倍</span></span><br><span class="line"><span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line"><span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>因为 ArrayList 的本质就是数组，所以查找很快，插入删除很慢。</p>
+<h4 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h4><p>Vector 与 ArrayList 一样也是通过数组实现的，不过它是线程安全的（通过加 synchronized 关键字，也就是上锁）。</p>
+<p>Vector 的默认初始容量也为 10，但是扩容因子为 2 。</p>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>LinkedList 是用带头尾指针的双向链表实现的，很适合在头部和尾部做插入和删除，也就是作为栈、队列和双向队列，不适合随机查找。</p>
+<h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><p>这是一个不常用的 List 的实现类，但是是线程安全的。</p>
+<p>CopyOnWriteArrayList 将读写分离：写操作在一个复制的数组上进行，读操作还是在原始数组中进行，读写分离，互不影响。</p>
+<p>写操作需要加锁，防止并发写入时导致写入数据丢失。</p>
+<p>写操作结束之后需要把原始数组的引用指向新的复制数组。</p>
+<p>优点：在写操作的同时允许读操作，大大提高了读操作的性能。</p>
+<p>缺点：</p>
+<ul>
+<li>由于需要复制数组，会占用两倍于容量的内存</li>
+<li>读操作不能读取实时性的数据，因为部分写操作的数据还未同步</li>
+</ul>
+<p>因此 CopyOnWriteArrayList 适合读多写少，对内存占用和实时性要求不高的场景。</p>
+<h3 id="Set（接口）"><a href="#Set（接口）" class="headerlink" title="Set（接口）"></a>Set（接口）</h3><p>Set 即数学意义上的集合，其元素不可重复且无序（存入和取出的顺序不一定相同）。</p>
+<p>Set 都是基于 Map 实现的。</p>
+<h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><p>HashSet 是通过 HashMap 实现的（所以详情看 HashMap），所有 key 都映射到 HashSet 的一个名为 PRESENT 的 Object 全局常量对象。</p>
+<p>相同的对象通过同样的哈希算法会映射到数组上的同一个索引，通过此特性可以实现去重的功能。</p>
+<h4 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h4><p>TreeSet 是基于 TreeMap 实现的（所以详情），在 Set 的基础上加入了可排序的特性（不是有序，TreeSet 仍然不能保证存入和取出的顺序相同），即存入的元素可以按照规定的顺序排放。</p>
+<p>因为是基于红黑树，所以 TreeSet 的效率要比 HashSet 慢。</p>
+<h4 id="LinkedHashSet"><a href="#LinkedHashSet" class="headerlink" title="LinkedHashSet"></a>LinkedHashSet</h4><p>LinkedHashSet 是通过 LinkedHashMap 来实现（所以详情看 LinkedHashMap）。</p>
+<p>LinkedHashSet 在 HashSet 的基础上额外维护一个双向链表，记录了元素的插入顺序，在 Set 的基础之上实现了有序（即元素插入与取出的顺序相同）的特性。</p>
+<h3 id="Queue（接口）"><a href="#Queue（接口）" class="headerlink" title="Queue（接口）"></a>Queue（接口）</h3><p>即数据结构中的队列，这是一个不太常用的接口。</p>
+<h4 id="LinkedList（队列）"><a href="#LinkedList（队列）" class="headerlink" title="LinkedList（队列）"></a>LinkedList（队列）</h4><p>LinkedList 也继承了它，因为其可以作为队列的实现。</p>
+<h4 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h4><p>PriorityQueue 即优先队列，是通过堆实现的，默认是小顶堆。优先队列会一直保证优先级最大的元素在队头。</p>
+<p>虽然堆的逻辑结构是一棵完全二叉树，但是它的物理结构仍然是数组。</p>
+<p>其默认初始容量为 11。当数组元素的数量要超过容量时也会扩容，但是当目前的容量小于 64 的时候，新数组的大小是两倍的原数组的大小 + 2；当大于等于 64 的时候，扩容因子与 ArrayList 一样为 1.5 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PriorityQueue 源码</span></span><br><span class="line"><span class="comment">// Double size if small; else grow by 50%</span></span><br><span class="line"><span class="keyword">int</span> newCapacity = oldCapacity + ((oldCapacity &lt; <span class="number">64</span>) ?</span><br><span class="line">                                  (oldCapacity + <span class="number">2</span>) :</span><br><span class="line">                                  (oldCapacity &gt;&gt; <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>对于优先队列的入队与出队，实际上就是往堆里插入元素和删除头节点，都需要操作完后调整堆，因此都是 O(logn) 的时间复杂度。</p>
+<h2 id="Map（接口）"><a href="#Map（接口）" class="headerlink" title="Map（接口）"></a>Map（接口）</h2><p>即键值对的集合，在需要维护映射关系的时候使用。key 不能重复，且不保证有序性。</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>HashMap 是最常用的 Map 实现类，内部是通过哈希表实现的。</p>
+<p>哈希表的本质也是数组，其默认初始容量为 16 ，扩容因子是 2 即扩容后容量翻倍。除此之外，其还有一个加载因子 0.75，意思是当数组的元素个数超过容量的 75% 时开始扩容而不是从即将装满时开始（从这里可看出，即将装满加载因子为 1）。</p>
+<p>HashMap 的数组实际上是 Map.Entry 的数组，Entry 是 Map 的内部接口，是对<strong>键值对</strong>的抽象。</p>
+<p>当 HashMap 添加一组键值对（key, value）时，会先取出 key 的 hashcode ，然后把 hashcode 与自己的右移 16 位做异或，其结果作为第一步的 hash 值（我称之为 hash1）。若 key 为 null，则直接为 0 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么作为第一步的 hash 值呢？因为这时候的 hash 值还是有可能超出数组的容量，比如 Integer 的 hashcode 就是自己的数值大小，那么至少在 65535 以内，这个 hash 值都是自己本身（与 0 异或），显然这个 hash 的数据范围还是太大。</p>
+<p>第二步，取出当前 HashMap 的容量也就是数组的长度 n，将 n - 1 与 hash 做与操作得到最终的 hash 值（我称之为 hash2)，这样直接将 hash 值的范围缩到数组的范围之内。</p>
+<p>这也是为什么默认初始容量设为 16，扩容因子是 2 的原因，因为要保证 HashMap 的容量是 2 的幂指数，这样 n - 1 才能在二进制中以全是 1 的形式存在，保证尽量多的 hash1 不会碰撞。</p>
+<p>所以也可以总结出 HashMap 的 hash 算法为：</p>
+<p>hashcode ^ (hashcode &gt;&gt;&gt; 16) &amp; (n - 1)</p>
+<p>当 key 的 hash 值最终还是碰撞了的话，就采用拉链法即拉一条链表，解决碰撞问题。</p>
+<h4 id="哈希洪水攻击"><a href="#哈希洪水攻击" class="headerlink" title="哈希洪水攻击"></a>哈希洪水攻击</h4><p>对于往哈希表连续插入 n 个数据：</p>
+<ul>
+<li><p>如果这些元素的键（Key）极少发生碰撞，这项任务就只需 O(n) 的时间。</p>
+</li>
+<li><p>如果这些键频繁发生碰撞，这项任务就需要 O(n²) 的时间。</p>
+</li>
+</ul>
+<p>针对哈希表的最坏情况，只要了解哈希表的哈希算法，就可以强行构造一系列相同键值的数据，然后发送到服务器，让服务器把所有资源都浪费在处理这个最差情况上。</p>
+<p>Java 的 hashcode 算法众所周知，所以 Java 的 HashMap 存在着很大的被攻击的风险。不过在 JDK1.8 之后，HashMap 添加了红黑树的设计。</p>
+<p>以 7 为边界点，当碰撞的节点个数超过 7 的时候，如果容量小于 64 ，则扩容，否则转化为红黑树。当碰撞的节点个数低于 7 的时候，又会转换回链表。</p>
+<p>红黑树优化了 HashMap 的插入效率，将最坏情况的时间复杂度降低至 O(nlogn)，有效地避免了哈希洪水攻击。</p>
+<p>不过，在扩容的时候，因为有可能导致 key 的 hash2 改变（因为 n 变大了），所以在拷贝原数组时，还需要遍历每个节点链表，查看其 hash2 的值是否改变，然后把所有发生改变的节点组成一个链表或者一棵红黑树，转移到新的位置上。</p>
+<h3 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h3><p>基于红黑树实现，为 Map 添加了可排序的功能（红黑树的中序遍历）</p>
+<p>这个规定的顺序不一定是顺序或者逆序，可以按照自己的需求去添加比较器的规则。比较器返回负数、零、正数分别对应于作为比较元素的左边的元素小于、等于、大于右边的元素。</p>
+<p>因为红黑树无论插入还是查找都是O(logn)，所以效率较其他的 Map 实现低（其他的 Map 是哈希表）</p>
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>LinkedHashMap 在 HashMap 的基础之上，加入了双向链表，用来维护元素插入的顺序，为 Map 添加了有序性。</p>
+<p>LinkedHashMap 的 Entry 较父类的多了两个指针：before，after，分别指向在其之前和之后插入的节点。</p>
+<p>LinkedHashMap 由于继承自 HashMap，所以其底层实现仍然是数组。默认初始容量、加载因子与扩容因子与 HashMap 的一致。</p>
+<h4 id="LinkedHashMap-和-LRU-算法"><a href="#LinkedHashMap-和-LRU-算法" class="headerlink" title="LinkedHashMap 和 LRU 算法"></a>LinkedHashMap 和 LRU 算法</h4><p>LRU 即最近最少使用，是一种常用的缓存淘汰算法，淘汰掉最近最少用到的缓存。</p>
+<p>LinkedHashMap 的特性，让其很适合做 LRU 算法。</p>
+<p>当把标志位 accessOrder 置为 true 时，表示双向链表中的元素按照访问的先后顺序排列，LinkedHashMap 会在调用 get 方法访问节点时，将该节点置于双向链表尾部，这样在头部的节点自然就是最近最少使用的节点了。</p>
+<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>和 HashMap 类似，但它是线程安全的，也是采用 synchronized 关键字。</p>
+<p>其默认初始容量为 11，加载因子为 0.75，扩容因子为 2 倍 + 1 。</p>
+<p>它是遗留类，不应该去使用它，而是使用 ConcurrentHashMap 来支持线程安全，ConcurrentHashMap 的效率会更高，因为 ConcurrentHashMap 引入了分段锁。</p>
+<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>ConcurrentHashMap 和 HashMap 实现上类似，最主要的差别是 ConcurrentHashMap 采用了分段锁（Segment），每个分段锁维护着数组上的一段，多个线程可以同时访问不同分段锁上的桶，从而使其并发度更高（并发度就是 Segment 的个数）。</p>
+<p>Segment 继承自 ReentrantLock。</p>
+<p>默认的并发级别为 16，也就是说默认创建 16 个 Segment。</p>
+<h4 id="size-操作"><a href="#size-操作" class="headerlink" title="size 操作"></a>size 操作</h4><p>每个 Segment 维护了一个 count 变量来统计该 Segment 中的键值对个数。</p>
+<p>在执行 size 操作时，需要遍历所有 Segment 然后把 count 累计起来。</p>
+<p>ConcurrentHashMap 在执行 size 操作时先尝试不加锁，如果连续两次不加锁操作得到的结果一致，那么可以认为这个结果是正确的。</p>
+<p>尝试次数使用 RETRIES_BEFORE_LOCK 定义，该值为 2，retries 初始值为 -1，因此尝试次数为 3。</p>
+<p>如果尝试的次数超过 3 次，就需要对每个 Segment 加锁。</p>
+<h3 id="WeakHashMap"><a href="#WeakHashMap" class="headerlink" title="WeakHashMap"></a>WeakHashMap</h3><p>WeakHashMap 的 Entry 继承自 WeakReference，被 WeakReference 关联的对象在下一次垃圾回收时会被回收。</p>
+<p>WeakHashMap 主要用来实现缓存，通过使用 WeakHashMap 来引用缓存对象，由 JVM 对这部分缓存进行回收。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/26/interview-cross-origin/" rel="prev" title="面试 —— 跨域">
+      <i class="fa fa-chevron-left"></i> 面试 —— 跨域
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/31/interview-java-concurrency/" rel="next" title="面试 —— Java 并发">
+      面试 —— Java 并发 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection（接口）"><span class="nav-number">1.</span> <span class="nav-text">Collection（接口）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List（接口）"><span class="nav-number">1.1.</span> <span class="nav-text">List（接口）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList"><span class="nav-number">1.1.1.</span> <span class="nav-text">ArrayList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector"><span class="nav-number">1.1.2.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList"><span class="nav-number">1.1.3.</span> <span class="nav-text">LinkedList</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CopyOnWriteArrayList"><span class="nav-number">1.1.4.</span> <span class="nav-text">CopyOnWriteArrayList</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set（接口）"><span class="nav-number">1.2.</span> <span class="nav-text">Set（接口）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HashSet"><span class="nav-number">1.2.1.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TreeSet"><span class="nav-number">1.2.2.</span> <span class="nav-text">TreeSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashSet"><span class="nav-number">1.2.3.</span> <span class="nav-text">LinkedHashSet</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue（接口）"><span class="nav-number">1.3.</span> <span class="nav-text">Queue（接口）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedList（队列）"><span class="nav-number">1.3.1.</span> <span class="nav-text">LinkedList（队列）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PriorityQueue"><span class="nav-number">1.3.2.</span> <span class="nav-text">PriorityQueue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map（接口）"><span class="nav-number">2.</span> <span class="nav-text">Map（接口）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMap"><span class="nav-number">2.1.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哈希洪水攻击"><span class="nav-number">2.1.1.</span> <span class="nav-text">哈希洪水攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeMap"><span class="nav-number">2.2.</span> <span class="nav-text">TreeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LinkedHashMap"><span class="nav-number">2.3.</span> <span class="nav-text">LinkedHashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkedHashMap-和-LRU-算法"><span class="nav-number">2.3.1.</span> <span class="nav-text">LinkedHashMap 和 LRU 算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">2.4.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">2.5.</span> <span class="nav-text">ConcurrentHashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#size-操作"><span class="nav-number">2.5.1.</span> <span class="nav-text">size 操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeakHashMap"><span class="nav-number">2.6.</span> <span class="nav-text">WeakHashMap</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xiaoyh</p>
+  <div class="site-description" itemprop="description">个人博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

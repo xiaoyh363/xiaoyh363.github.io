@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什么是跨域a">
+  <meta name="description" content="浏览器的同源策略同源策略是一个重要的安全策略，它限制了从同一个源加载的文档或者脚本如何与另一个源的资源进行交互，这是一个用于隔离潜在恶意文件的重要安全机制。 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议&#x2F;主机&#x2F;端口元组”，或者直接是 “元组”。 没有同源策略限制的两大危险场景没有同源策略限制的接口请求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试 —— 跨域">
 <meta property="og:url" content="http://yoursite.com/2020/05/26/interview-cross-origin/index.html">
 <meta property="og:site_name" content="xiaoyh 的个人博客">
-<meta property="og:description" content="什么是跨域a">
+<meta property="og:description" content="浏览器的同源策略同源策略是一个重要的安全策略，它限制了从同一个源加载的文档或者脚本如何与另一个源的资源进行交互，这是一个用于隔离潜在恶意文件的重要安全机制。 如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议&#x2F;主机&#x2F;端口元组”，或者直接是 “元组”。 没有同源策略限制的两大危险场景没有同源策略限制的接口请求">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-26T06:31:01.000Z">
-<meta property="article:modified_time" content="2020-05-26T06:42:44.542Z">
+<meta property="article:modified_time" content="2020-05-26T10:19:15.823Z">
 <meta property="article:author" content="xiaoyh">
 <meta property="article:tag" content="网络">
 <meta property="article:tag" content="安全">
@@ -188,7 +188,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-26 14:31:01 / 修改时间：14:42:44" itemprop="dateCreated datePublished" datetime="2020-05-26T14:31:01+08:00">2020-05-26</time>
+              <time title="创建时间：2020-05-26 14:31:01 / 修改时间：18:19:15" itemprop="dateCreated datePublished" datetime="2020-05-26T14:31:01+08:00">2020-05-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,8 +211,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h1><p>a</p>
-
+        <h2 id="浏览器的同源策略"><a href="#浏览器的同源策略" class="headerlink" title="浏览器的同源策略"></a>浏览器的同源策略</h2><p>同源策略是一个重要的安全策略，它限制了从同一个源加载的文档或者脚本如何与另一个源的资源进行交互，这是一个用于隔离潜在恶意文件的重要安全机制。</p>
+<p>如果两个 URL 的 protocol、port (如果有指定的话)和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。</p>
+<h2 id="没有同源策略限制的两大危险场景"><a href="#没有同源策略限制的两大危险场景" class="headerlink" title="没有同源策略限制的两大危险场景"></a>没有同源策略限制的两大危险场景</h2><h3 id="没有同源策略限制的接口请求"><a href="#没有同源策略限制的接口请求" class="headerlink" title="没有同源策略限制的接口请求"></a>没有同源策略限制的接口请求</h3><p>当用户登录某知名网站 A 成功后会获取到 cookie，且 cookie 往往会在浏览器中存在很长的一段时间。</p>
+<p>黑客诱导用户访问自己的网站，并在自己的网站中藏有对网站 A 的恶意请求脚本（比如转账），由于每次浏览器发起请求都会带着 cookie，所以相当于黑客登录了你的账号。这种攻击方式也叫做 CSRF 攻击。</p>
+<h3 id="没有同源策略限制的-Dom-查询"><a href="#没有同源策略限制的-Dom-查询" class="headerlink" title="没有同源策略限制的 Dom 查询"></a>没有同源策略限制的 Dom 查询</h3><p>黑客在自己网站中嵌入（通过 iframe 等标签）网站 A 的敏感页面（如登录页面）伪装成网站 A，诱导用户登录自己的钓鱼网站并输入用户名和密码。</p>
+<p>其实同源策略对于这一点的影响不大，因为即使不嵌入，也可以仿造网站 A 的敏感页面直接写一个网站出来。</p>
+<h2 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h2>
     </div>
 
     
@@ -235,7 +240,10 @@
     <a href="/2020/05/25/interview-jvm/" rel="prev" title="面试题 —— Java 虚拟机">
       <i class="fa fa-chevron-left"></i> 面试题 —— Java 虚拟机
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/26/interview-java-collections/" rel="next" title="面试 —— Java 容器">
+      面试 —— Java 容器 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -294,7 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是跨域"><span class="nav-number">1.</span> <span class="nav-text">什么是跨域</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器的同源策略"><span class="nav-number">1.</span> <span class="nav-text">浏览器的同源策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#没有同源策略限制的两大危险场景"><span class="nav-number">2.</span> <span class="nav-text">没有同源策略限制的两大危险场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#没有同源策略限制的接口请求"><span class="nav-number">2.1.</span> <span class="nav-text">没有同源策略限制的接口请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有同源策略限制的-Dom-查询"><span class="nav-number">2.2.</span> <span class="nav-text">没有同源策略限制的 Dom 查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待更新"><span class="nav-number">3.</span> <span class="nav-text">待更新</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -308,7 +316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
